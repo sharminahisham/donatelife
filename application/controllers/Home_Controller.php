@@ -1,5 +1,5 @@
 <?php 
-// defined('BASPATH') OR exit('No direct script acces alloewed');
+// defined('BASEPATH') OR exit('No direct script acces alloewed');
 
 
 /**
