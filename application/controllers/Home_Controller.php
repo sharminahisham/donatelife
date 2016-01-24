@@ -1,0 +1,22 @@
+<?php 
+// defined('BASPATH') OR exit('No direct script acces alloewed');
+
+
+/**
+* Home controller
+*/
+class Home_Controller extends CI_Controller
+{
+	
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	public function index()
+	{
+		$this->load->view('home');
+	}
+}
+
+ ?>
