@@ -10,7 +10,8 @@ class Admin_Controller extends CI_Controller
 		parent::__construct();
 	
 		$this->load->helper(['url','form']);
-		$this->load->library(['form_validation']);
+		
+		$this->load->library('form_validation');
 		$this->load->model('Donor_Model');
 		$this->load->model('Opinion_Model');
 
@@ -25,7 +26,7 @@ class Admin_Controller extends CI_Controller
 		if($result->num_rows() >= 1)
 		{
 			$data ['result'] = $result->result();
-			$this->load->view('admin/view_donors',$data);
+			$this->load->view('admin/view_registered_users',$data);
 		}
 	}
 
@@ -42,30 +43,38 @@ class Admin_Controller extends CI_Controller
 
 	public function accept()
 	{
-		$this->form_validation->set_rules('opinion', 'Opinion', 'xss_clean');
+		$this->form_validation->set_rules('opinion', 'opinion', ['required']);
+		
 
-		if ($this->form_validation->run() === FALSE) {
+		
+			
+		if ($this->form_validation->run('acceptform') === FALSE) {
 			$this->load->view('admin/view_donor');	
+			echo "string5";
 		}
 		else
 		{
+			echo "string";
 			$opinion = $this->input->post('opinion');
 			$donor_id = $this->input->post('id');
+			var_dump($opinion);
+			var_dump($donor_id);
 
 			$data = [
+				'type' => 'admin',
 				'description' => $opinion,
-				'type' => 'admin'
 			];
-			$query = $this->Opinion->Model->add($data);
+			$query = $this->Opinion_Model->add($data);
 			if ($query != FALSE) {
 				$opinion_id = $query;	
 
 				$data = [
 					'statuscode' => '1',
-					'openion_id' => $opinion_id
+					'opinion_id' => $opinion_id
 				];
 
-				if($this->Donor_Modle->update(['id' => $donor_id], $data) )	
+				$where = ['id' => $donor_id];
+				if($this->Donor_Model->upadte($where, $data) )	
 				{
 					var_dump('success');
 				}

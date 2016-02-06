@@ -31,9 +31,12 @@ class Donor_Model extends CI_Model
 		}
 	}
 
-	public function upadte(array $where, array $data)
+	public function upadte( $where, $data)
 	{
-		
+		$this->db->where($where);
+		$update = $this->db->update('donor', $data);
+		return $update;
+
 	}
 
 
