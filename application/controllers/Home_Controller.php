@@ -1,5 +1,5 @@
 <?php 
-// defined('BASPATH') OR exit('No direct script acces alloewed');
+// defined('BASEPATH') OR exit('No direct script acces alloewed');
 
 
 /**
@@ -38,7 +38,7 @@ class Home_Controller extends CI_Controller
 	}
 
 
-	public function add_registrations()
+	public function add_doner()
 	{
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('dob', 'dob', 'required');
@@ -49,13 +49,9 @@ class Home_Controller extends CI_Controller
 		 $this->form_validation->set_rules('number', 'number','');
 		 $this->form_validation->set_rules('mail', 'mail','');
 		 $this->form_validation->set_rules('place', 'place','');
-
-
-		
-
-		if($this->form_validation->run() === FALSE)
+	  if($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('registrations');
+			$this->load->view('donor');
 		}
 		else
 		{
@@ -83,7 +79,7 @@ class Home_Controller extends CI_Controller
 				
 			];
 			
-			if($this->registrations_Model->add($data))
+			if($this->donor_Model->add($data))
 			{
 				var_dump(success);
 			}
@@ -92,7 +88,7 @@ class Home_Controller extends CI_Controller
 			{
 				var_dump(fail);
 			}
-			// if($this->db->insert('registrations',$data))
+			// if($this->db->insert('donor',$data))
 			// {
 			// 	$app_id = $this->db->insert_id();
 			// 	echo "Data Entry is Success";
