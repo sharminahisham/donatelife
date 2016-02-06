@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>view registered_users</title>
+	<title>view registered_user</title>
 </head>
 <body>
 		<table border="2px">
