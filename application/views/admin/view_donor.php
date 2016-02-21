@@ -13,9 +13,9 @@
 	bloodgroup : <?php echo $result['0']->bloodgroup;
 
 	 ?><br>
-	<?php echo form_open(base_url('Admin_Controller/accept'), ['id' => 'acceptform','name' => 'acceptform']) ?>
+	 <?php echo form_open(base_url('Admin_Controller/accept'), ['id' => 'acceptform','name' => 'acceptform']) ?>
 		<?php echo validation_errors() ;?>
-		opinion: <input type="text" name="opinion" id="opinion">	
+	    opinion: <input type="text" name="opinion" id="opinion">	
 		 <input type="hidden" name="id" value="<?php echo $result['0']->id ?>" />
 		<button type="submit"> Submit</button>
 	</form>

@@ -14,6 +14,22 @@ class Donor_Model extends CI_Model
 		$this->load->database();
 	}
 
+	public function view_all()
+	{
+		$query = $this->db->get($this->table); 
+		if($query)
+		{
+			if($query->num_rows() >=1 )
+			{
+				return $query->result();
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+	}
+
 	public function view(array $where)
 	{
 		$this->db->where($where);
@@ -31,7 +47,7 @@ class Donor_Model extends CI_Model
 		}
 	}
 
-	public function upadte( $where, $data)
+	public function update( $where, $data)
 	{
 		$this->db->where($where);
 		$update = $this->db->update('donor', $data);
@@ -39,6 +55,17 @@ class Donor_Model extends CI_Model
 
 	}
 
+    public function add($data)
+    {
+    	if($this->db->insert($this->table, $data))
+		{
+			return $this->db->insert_id();
+		}else
+		{
+			return FALSE;
+		}
+	}
+    
 
 }
 

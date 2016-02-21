@@ -1,0 +1,64 @@
+.width-50 {width: 50%;}
+.width-25 {width: 25%;}
+.width-20 {width: 20%;}
+.width-33 {width: 33.333%;}
+.width-80 {width: 80%;}
+.width-100 {width: 100%;}
+
+.page-wrapper {
+	background-color: #fff;
+	float: left;
+}
+.registration {
+	width: 50%;
+	/*overflow: hidden;*/
+	margin: 0 auto;
+}
+.group {
+	margin: 5px auto;
+	float: left;
+	box-sizing: border-box;
+	padding: 10px;
+}
+.group span {
+	display: block;
+	text-align: left;
+}
+ .group .gender-radio {
+	float: left;
+	margin: 10px 10px 0 0;
+ }
+.group input, .group textarea, .group select {
+	margin: 5px 0;
+	border: 1px solid #333;
+	display: block;
+	padding: 1px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+	border-radius: 4px;
+	background-color: #fff;
+}
+.group input[type="radio"], .group input[type="submit"] {
+	display: inline-block;
+	width: unset;
+}
+.group input[type="submit"] {
+	background-color:  #93B0B1;;
+	color: #fff;
+	transition: background-color 0.3s ease;
+}
+.group input[type="submit"]:hover {
+	background-color: #fa8072;
+}
+.group select {
+	width: unset;
+	background-color: #fff;
+}
+.group .dob {
+	display: inline-block;
+}
+.error {
+	color: #f00;
+	float: left;
+}

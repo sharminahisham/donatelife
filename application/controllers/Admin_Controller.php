@@ -9,9 +9,9 @@ class Admin_Controller extends CI_Controller
 	{
 		parent::__construct();
 	
-		$this->load->helper(['url','form']);
+		$this->load->helper(['url','form','html']);
 		
-		$this->load->library('form_validation');
+		$this->load->library(['form_validation', 'table']);
 		$this->load->model('Donor_Model');
 		$this->load->model('Opinion_Model');
 
@@ -20,14 +20,27 @@ class Admin_Controller extends CI_Controller
 
 	public function view()
 	{
+		// $where = ['statuscode' => '0'];
+		$data = $this->Donor_Model->view_all();
+		if ($data != null) {
+			$this->table->set_heading('id', 'name', 'blood group', 'states code');
+			foreach ($data as $key => $value) {
+				if($value->statuscode == '0')
+					$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode,'<a href='.base_url('Admin_Controller/view_donor/'.$value->id).'">accept</a>','<a href="'.base_url('Admin_Controller/reject/'.$value->id).'">reject</a>');
+				else
+					$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode);
 
-		$this->db->where(['statuscode' => '0']);
-		$result = $this->db->get('donor');
-		if($result->num_rows() >= 1)
+			}
+			$data['result'] = $this->table->generate();
+			$this->load->view('admin/view_registered_users',$data);
+
+		}
+		else
 		{
-			$data ['result'] = $result->result();
+			$data['result'] = 'no data found';
 			$this->load->view('admin/view_registered_users',$data);
 		}
+		
 	}
 
 
@@ -50,16 +63,12 @@ class Admin_Controller extends CI_Controller
 			
 		if ($this->form_validation->run('acceptform') === FALSE) {
 			$this->load->view('admin/view_donor');	
-			echo "string5";
+	
 		}
 		else
 		{
-			echo "string";
 			$opinion = $this->input->post('opinion');
 			$donor_id = $this->input->post('id');
-			var_dump($opinion);
-			var_dump($donor_id);
-
 			$data = [
 				'type' => 'admin',
 				'description' => $opinion,
@@ -74,19 +83,30 @@ class Admin_Controller extends CI_Controller
 				];
 
 				$where = ['id' => $donor_id];
-				if($this->Donor_Model->upadte($where, $data) )	
+				if($this->Donor_Model->update($where, $data) )	
 				{
-					var_dump('success');
-				}
+					$data['message'] = '<script type="text/Javascript">
+											alert("success");
+											window.location = "'.base_url("Admin_Controller/view").'";
+										</script>';
+					$this->load->view('admin/view_registered_users',$data);
+				}	
 				else
 				{
-					var_dump('error');
+					$data['message'] = '<scrip type="text/Javascript">
+					                         alert("Registration Failed ! Try again later");
+                                             window.location ="'.base_url("Admin_Controller/view").'"
+					                    </script>';
+					$this->load->view('admin/view_registered_users',$data);
 				}
 			}
 			else
 			{
-				$data[$error] = 'Server Down ! Please try again';
-				$this->load->view('admin/view_donor', $data);
+				$data[$error] = '<script type="text/javascript" >
+                                          alert("Server Down ! Try Again");
+                                          window.location="'.base_url("Admin_Controller/view").'"
+				                 </script>';
+				$this->load->view('admin/view_registered_users', $data);
 			}
 
 
@@ -97,20 +117,31 @@ class Admin_Controller extends CI_Controller
 
 	public function reject($id)
 	{
-	    $rjt=['statuscode'=> 'false'];
-	    $this->db->where (['id' => $id]);
-	    if ($this->db->update('donor',$rjt))
-	    {
-	    	redirect(base_url('Admin_Controller/view'), 'refresh');
-	    }
-	    else
-	    {
-	    	var_dump('fail');
-	    }
+	
+			$data= ['statuscode'=>'False'];
 
-		}
 
+	   				$where = ['id' => $id];
+				if($this->Donor_Model->update($where, $data) )	
+				{
+				$data['message'] = '<script type="text/Javascript">
+											alert("Rejected ! Try Again");
+											window.location = "'.base_url("Admin_Controller/view").'";
+										</script>';
+					$this->load->view('admin/view_registered_users',$data);
+			}
+				else
+			    {
+				$data[$error] = '<script type="text/javascript" >
+                                          alert("Server Down ! Try Again");
+                                          window.location="'.base_url("Admin_Controller/view").'"
+				                 </script>';
+				$this->load->view('admin/view_registered_users', $data);
+			    }
+	}
+		
+    
 
 }
 
- ?>
+?>

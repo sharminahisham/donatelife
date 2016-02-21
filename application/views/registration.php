@@ -3,115 +3,130 @@
 <head>
 	<meta charset="UTF-8">
 	<title>application form</title>
+	<link rel="stylesheet" href="../../css/normalize.css">
+	<link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-<h2>REGISTRATION FORM</h2>
-	<br>
-	<br>
-NAME:<input type="text"name="NAME"ID="NAME">
-	<br><br>
-DOB:<select name="day">
-<option namevalue="1">1</option>
-<option namevalue="2">2</option>
-<option namevalue="3">3</option>
-<option namevalue="4">4</option>
-<option namevalue="5">5</option>
-<option namevalue="6">6</option>
-<option namevalue="7">7</option>
-<option namevalue="8">8</option>
-<option namevalue="9">9</option>
-<option namevalue="10">10</option>
-<option namevalue="11">11</option>
-<option namevalue="12">12</option>
-<option namevalue="13">13</option>
-<option namevalue="14">14</option>
-<option namevalue="15">15</option>
-<option namevalue="16">16</option>
-<option namevalue="17">17</option>
-<option namevalue="18">18</option>
-<option namevalue="19">19</option>
-<option namevalue="20">20</option>
-<option namevalue="21">21</option>
-<option namevalue="22">22</option>
-<option namevalue="23">23</option>
-<option namevalue="24">24</option>
-<option namevalue="25">25</option>
-<option namevalue="26">26</option>
-<option namevalue="27">27</option>
-<option namevalue="28">28</option>
-<option namevalue="29">29</option>
-<option namevalue="30">30</option>
-<option namevalue="31">31</option>
-</select>
-<select name="month">
-<option namevalue="1">1</option>
-<option namevalue="2">2</option>
-<option namevalue="3">3</option>
-<option namevalue="4">4</option>
-<option namevalue="5">5</option>
-<option namevalue="6">6</option>
-<option namevalue="7">7</option>
-<option namevalue="8">8</option>
-<option namevalue="9">9</option>
-<option namevalue="10">10</option>
-<option namevalue="11">11</option>
-<option namevalue="12">12</option>
-</select>
-<select name="year">
-<option namevalue="1">1995</option>
-<option namevalue="2">1996</option>
-<option namevalue="3">1997</option>
-<option namevalue="4">1998</option>
-<option namevalue="5">1999</option>
-<option namevalue="6">2000</option>
-<option namevalue="7">2001</option>
-<option namevalue="8">2002</option>
-<option namevalue="9">2003</option>
-<option namevalue="10">2004</option>
-<option namevalue="11">2005</option>
-<option namevalue="12">2006</option>
-<option namevalue="13">2007</option>
-<option namevalue="14">2008</option>
-<option namevalue="15">2009</option>
-<option namevalue="16">2010</option>
-<option namevalue="17">2011</option>
-<option namevalue="18">2012</option>
-<option namevalue="19">2013</option>
-<option namevalue="20">2014</option>
-<option namevalue="21">2015</option>
-<option namevalue="22">2016</option>
-</select>
-<br><br>
-ADDRESS:<textarea name="address" id="SADDRES"></textarea>
-<br><br>
-GENDER:<input type="radio"name="sex"value="M">M
-<input type="radio"name="sex"value="F">F
-<br><br>
-BLOOD GROUP:<select name="blood">
-<option namevalue="1">A+</option>
-<option namevalue="2">B+</option>
-<option namevalue="3">AB+</option>
-<option namevalue="4">O+</option>
-<option namevalue="5">A-</option>
-<option namevalue="6">B-</option>
-<option namevalue="7">AB-</option>
-<option namevalue="8">O-</option>
-</select>
-<br><br>
-HOSPITALS:<select name="hospital">
-<option namevalue="1">MALABAR Hospital(manjeri)</option>
-<option namevalue="2">MANU MEMMORIYAL HospitaL(manjeri)</option>
-<option namevalue="3">MES HospitaL(perithalmanna)</option>
-</select>
-<br><br>
-NUMBER:<input type="tell" name="num" id="number">
-<br><br>
-MAIL:<input type="mail" name="ma"id="mail">
-<br><br>
-PLACE:<input type="text"name="uplace"id="place">
-<br>
-<br>
-<input type="submit" name="usubmit" id="submit" value="SUBMIT">
-<input type="submit" name="ucancel" id="cancel" value="CANCEL">
+	<div class="page-wrapper">
+		<div class="registration">
+			<?php echo form_open(base_url('Home_Controller/add_donor'),['id' => 'addform', 'name' => 'addform'])
+			?>
+				<?php echo validation_errors();?>
+				
+				<h2>REGISTRATION FORM</h2>
+				<div class="group width-100">
+					<label for="name">NAME</label>
+					<input type="text" name="name" id="name" value="<?php echo set_value('name');?>">
+					<div class="error">
+						<?php echo form_error('name'); ?>
+                    </div>
+				</div>
+				<div class="group width-50">
+					<span>GENDER</span>
+					<div class="gender-radio">
+						<label for="male">Male</label>
+						<input type="radio" id="male" name="gender" value="male" <?php echo set_radio('gender','male');?> >
+					</div>
+					<div class="gender-radio">
+						<label for="female">Female</label>
+						<input type="radio" name="gender" id="female" value="female" <?php echo set_radio('gender','female');?> >
+					</div>
+					<div class="error">
+						<?php echo form_error('gender'); ?>
+                    </div>
+				</div>
+				<div class="group width-50">
+					<span>DATE OF BIRTH</span>
+					<select name="date" id="date" class="dob" >
+						<?php for ($i=1; $i<=31; $i++) {?>
+						<option value="<?php echo $i ?>" <?php echo set_select('date',$i);?> ><?php echo $i ?></option>
+						<?php } ?>
+					</select>
+					<select name="month" id="month" class="dob">
+						<?php for ($i=1;$i<=12;$i++) {?>
+						<option value="<?php echo $i ?>"<?php echo $i,set_select('month',$i) ?>><?php echo $i ?></option>
+						<?php } ?>
+					</select>
+					<select name="year" id="year" class="dob">
+						<?php for ($i=1975;$i<=2016;$i++) {?>
+						<option value="<?php echo $i ?>"<?php echo $i,set_select('year',$i) ?>><?php echo $i ?></option>
+						<?php } ?>
+					</select>
+					<div class="error">
+						<?php echo form_error('dob'); ?>
+					</div>
+				</div>
+				<div class="group width-100">
+					<label for="ADDRESS">ADDRESS</label>
+					<textarea name="address" id="ADDRESS" cols="10" rows="5"><?php echo set_value('address') ?></textarea>
+					<div  class="error">
+						<?php echo form_error('address'); ?>
+					</div>
+				</div>
+				<div class="group width-33">
+					<label for="">BLOOD GROUP</label>
+					<select name="bloodgroup">
+						<option value="" selected="" disabled="">select</option>
+						<option value="a+"<?php echo  set_select('bloodgroup', 'a+'); ?> >A+</option>
+						<option value="b+"<?php echo  set_select('bloodgroup', 'b+'); ?> >B+</option>
+						<option value="ab+"<?php echo  set_select('bloodgroup', 'ab+'); ?> >AB+</option>
+						<option value="0+"<?php echo  set_select('bloodgroup', 'o+'); ?> >O+</option>
+						<option value="a-"<?php echo  set_select('bloodgroup', 'a-'); ?> >A-</option>
+						<option value="b-"<?php echo  set_select('bloodgroup', 'b-'); ?> >B-</option>
+						<option value="ab-"<?php echo  set_select('bloodgroup', 'ab-'); ?> >AB-</option>
+						<option value="o-"<?php echo  set_select('bloodgroup', 'o-'); ?> >O-</option>
+						<option value="I Dont Know"<?php echo  set_select('bloodgroup', 'I Dont Know'); ?> >I Dont Know</option>
+					</select>
+					<div  class="error">
+						<?php echo form_error('bloodgroup'); ?>
+					</div>
+				</div>
+				<div class="group width-33">
+					<label for="hospital">HOSPITALS</label>
+					<select name="hospital" id="hospital">
+					<option value="" selected="" disabled="">select</option>
+					<?php 
+						if (isset($result) and $result != FALSE) {
+							foreach ($result as $key => $value)
+							{
+								echo '<option value="'.$value->id.'"'.set_select('hospital',$value->name).'>'.$value->name.'</option>';
+							}
+						}?>
+						
+					</select>
+					<div  class="error">
+						<?php echo form_error('hospital'); ?>
+					</div>
+				</div>
+				<div class="group width-100">
+					<label for="mobile">NUMBER</label>
+					<input type="tell" name="mobile" id="mobile" value="<?php echo set_value('mobile'); ?>">
+					<div  class="error">
+						<?php echo form_error('mobile'); ?>
+					</div>
+				</div>
+				<div class="group width-100">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>">
+					<div  class="error">
+						<?php echo form_error('email'); ?>
+					</div>
+				</div>
+				<div class="group width-100">
+					<input type="submit" name="usubmit" id="submit" value="SUBMIT">
+					<input type="submit" name="ucancel" id="cancel" value="CANCEL">
+				</div>
+			</form>
+		</div>
+	</div>
+	<?php if (isset($message))
+	{
+		echo $message;
+	} 
+	if (isset($error)) {
+		echo $error;
+		# code...
+	}
+	?>
 </body>
 </html>

@@ -13,21 +13,24 @@ class Home_Controller extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper(['url', 'form']);
-		$this->load->library(['form_validation']);
-		$this->load->database();
-
+		$this->load->library(['form_validation','table']);
+		$this->load->model('Donor_Model');
+		$this->load->model('Hospital_Model');
 	}
 		
 
 	public function index()
 	{
 		$this->load->view('home');
+
 	}
 
 	public function registration($page='registration')
 	{
-		$this->load->view($page);
+		$data['result'] = $this->Hospital_Model->view_all();
+		$this->load->view($page,$data);
 	}
+	
 	public function login($page='login')
 	{
 		$this->load->view($page);
@@ -38,56 +41,66 @@ class Home_Controller extends CI_Controller
 	}
 
 
-	public function add_doner()
+	public function add_donor()
 	{
-		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('dob', 'dob', 'required');
+		 $this->form_validation->set_rules('name', 'name', 'required');
+		 $this->form_validation->set_rules('date', 'date', 'required');
+		 $this->form_validation->set_rules('month', 'month', 'required');
+		 $this->form_validation->set_rules('year', 'year', 'required');
 		 $this->form_validation->set_rules('address', 'address', 'required');
 		 $this->form_validation->set_rules('gender', 'gender', 'required');
 		 $this->form_validation->set_rules('bloodgroup', 'bloodgroup', 'required');
-		 $this->form_validation->set_rules('hospitals', 'hospitals', 'required');
-		 $this->form_validation->set_rules('number', 'number','');
-		 $this->form_validation->set_rules('mail', 'mail','');
-		 $this->form_validation->set_rules('place', 'place','');
+		 $this->form_validation->set_rules('hospital', 'hospitalname', 'required');
+		 $this->form_validation->set_rules('mobile', 'mobile','required');
+		 $this->form_validation->set_rules('email', 'email','required');
+
 	  if($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('donor');
+			$data['result'] = $this->Hospital_Model->view_all();
+			$this->load->view('registration',$data);
 		}
 		else
 		{
 			$name = $this->input->post('name');
-			$dob = $this->input->post('dob');
 			$address = $this->input->post('address');
 			$gender = $this->input->post('gender');
 			$bloodgroup = $this->input->post('bloodgroup');	
-			$hospitals = $this->input->post('hospitals');
-			$number = $this->input->post('number');
-			$mail = $this->input->post('mail');
-			$place = $this->input->post('place');
-			
+			$hospital = $this->input->post('hospital');
+			$number = $this->input->post('mobile');
+			$mail = $this->input->post('email');
+			$date = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('date');
 
 			$data = [
 				'name' => $name,
-				'dob' => $dob,
+				'dob' => $date,
 				'address'=> $address,
 				'gender'=> $gender,
 				'bloodgroup'=> $bloodgroup,
-				'hospitals'=> $hospitals,
-				'number'=> $number,
-				'mail'=> $mail,
-				'place'=> $place,
-				
+				'mobile'=> $number,
+				'email'=> $mail,
+				'statuscode' => '0',
+				'hospital_id' => $hospital
+
 			];
-			
-			if($this->donor_Model->add($data))
+
+			   if($this->Donor_Model->add($data))
 			{
-				var_dump(success);
+				$data['message'] = '<script type = "text/javaScript">
+										alert("success!");
+										window.location = "'.base_url('Admin_Controller/view').'";
+									</script>';
+				$this->load->view('registration',$data);
 			}
 			
 			else
 			{
-				var_dump(fail);
+				$data['error'] = '<script type = "text/javaScript">
+										alert("Failed!");
+										window.location = "'.base_url('Admin_Controller/view').'";
+									</script>';
+				$this->load->view('registration',$data);
 			}
+				
 			// if($this->db->insert('donor',$data))
 			// {
 			// 	$app_id = $this->db->insert_id();
@@ -95,7 +108,9 @@ class Home_Controller extends CI_Controller
 			// }
 		}
 	}
-}
 
+	
+	
+}
 
  ?>
