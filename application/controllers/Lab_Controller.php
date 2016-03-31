@@ -25,20 +25,20 @@ class Lab_Controller extends CI_Controller
 	{
 		$data = $this->Lab_Model->view();
 		if ($data != null) {
-			$this->table->set_heading('date', 'time', 'tokenno', 'forwadedby','forwadedto','medicalreport','verifiedby');
+			$this->table->set_heading('date', 'time', 'tokenno', 'forwadedby','forwadedto','medicalreport');
 			foreach ($data as $key => $value) {
 				
-					$this->table->add_row($value->date, $value->time, $value->tokenno, $value->forwadedby,$value->forwadedto,$value->medicalreport , $value->verifiedby);
+					$this->table->add_row($value->testdate, $value->testtime, $value->tokenno, $value->forwadedby,$value->forwadedto,$value->medicalreport );
 
 			}
 			$data['result'] = $this->table->generate();
-			$this->load->view('admin/view_lab');
+			$this->load->view('admin/view_lab',$data);
 
 		}
 		else
 		{
 			$data['result'] = 'no data found';
-			$this->load->view('labreport');
+			$this->load->view('admin/view_lab',$data);
 		}
 	}
 	public function add_report()
@@ -84,7 +84,7 @@ class Lab_Controller extends CI_Controller
 		    	                     alert(" Successfully Forwaded");
 		    	                     window.location = "'.base_url('Lab_Controller/view').'";
 		    	                     </script>';
-		    	    $this->load->view('labreport',$data);
+		    	    $this->load->view('admin/labreport',$data);
 
 		    	}
 				else
@@ -93,7 +93,7 @@ class Lab_Controller extends CI_Controller
                                     alert("Forwading failed");
                                     window.location = "'.base_url('Lab_Controller/add_report').'"
                                    </script>';
-                     $this->load->view('labreport',$data);              
+                     $this->load->view('admin/labreport',$data);              
 				}
             }
 	    }

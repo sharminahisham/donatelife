@@ -45,6 +45,7 @@ class Admin_Controller extends Check_Logged
 			if ($this->User_Model->login($username, $password, 'admin')) {
 				$userdata = [
 					'username' => $username,
+					'type' => 'admin',
 					'logged_in' => true
 				];
 				$this->session->set_userdata('logged_in', $userdata);
@@ -105,11 +106,18 @@ class Admin_Controller extends Check_Logged
 
 	public function view_donor($id)
 	{
-		$result = $this->Donor_Model->view(['id' => $id]);
-		if ($result != FALSE) {
-			$data['result'] = $result;
-			$this->load->view('admin/view_donor',$data);
+		if($this->logged == true)
+		{
+			$result = $this->Donor_Model->view(['id' => $id]);
+			if ($result != FALSE) {
+				$data['result'] = $result;
+				$this->load->view('admin/view_donor',$data);
+			}
 
+		}
+		else
+		{
+			redirect(base_url('Admin_Controller/login'));
 		}
 	}
 

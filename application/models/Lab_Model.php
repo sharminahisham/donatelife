@@ -29,6 +29,7 @@ class Lab_Model extends CI_Model
 
 	public function insert($data)
 	{
+		$this->db->query("SET FOREIGN_KEY_CHECKS = 0");
         if($this->db->insert($this->table,$data))
         {
         	return $this->db->insert_id();
