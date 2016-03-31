@@ -3,7 +3,8 @@
 /**
 * 
 */
-class Hospital_Controller extends CI_Controller
+require_once(APPPATH.'controllers/Check_Logged.php');
+class Hospital_Controller extends Check_Logged
 {
 	
 	public function __construct()
@@ -26,23 +27,7 @@ class Hospital_Controller extends CI_Controller
 
 	public function view()
 		{
-			$data=$this->Hospital_Model->view_all();
-			if($data != null)
-				{
-					$this->table->set_heading('hospitalname','hospitalcode','address');
-					foreach ($data as $key => $value) 
-						{
-							$this->table->add_row($value->name, $value->code, $value->address);
-						}
-
-					$data['result'] = $this->table->generate();
-					$this->load->view('admin/view_registered_hospitals',$data);
-				}
-			else
-				{
-					$data['result'] = "No data found";
-					$this->load->view('admin/view_registered_hospitals',$data);
-				}
+			
 		}	
 
 
@@ -77,39 +62,30 @@ class Hospital_Controller extends CI_Controller
 					'code' => $code,
 					'address' => $address,
 					'contact' => $contact,
-					'email' => $mail
+					'email' => $mail,
+					'username' =>$username,	
+				    'password' =>$password,
 			    ];
 
 			    if($this->Hospital_Model->add($data))
 
-			    	{
-				    	$data = [
-				    		'username' =>$username,
-				    		'password' =>$password,
-				    		'usertype' =>'hospital'
-				    	];
+		    	{	
+		    	    $data['message'] = '<script type="text/javascript">
+		    	                     alert("Registration successfully completed");
+		    	                     window.location = "'.base_url('Home_Controller/add_hospital').'";
+		    	                     </script>';
+		    	    $this->load->view('hospital_registration',$data);
 
-			    		if($this->User_Model->add($data))
-                    		{	
-					    	    $data['message'] = '<script type="text/javascript">
-					    	                     alert("Registration successfully completed");
-					    	                     window.location = "'.base_url('Hospital_Controller/view').'";
-					    	                     </script>';
-					    	    $this->load->view('hospital_registration',$data);
-
-					    	}
-						else
-							{
-	               
-			                    $data['message'] = '<script type="text/javascript">
-			                                    alert("Registration failed");
-			                                    window.location = "'.base_url('Hospital_Controller/view').'"
-			                                   </script>';
-			                     $this->load->view('hospital_registration',$data);              
-							}
-
-					}
-             }
+		    	}
+				else
+				{
+                    $data['message'] = '<script type="text/javascript">
+                                    alert("Registration failed");
+                                    window.location = "'.base_url('Home_Controller/add_hospital').'"
+                                   </script>';
+                     $this->load->view('hospital_registration',$data);              
+				}
+            }
 	    }
 
 }

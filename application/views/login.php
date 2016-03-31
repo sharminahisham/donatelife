@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>login</title>
+	<title> LOGIN</title>
 </head>
 <body>
-<h1>Login</h1>
+<h1>LOGIN</h1>
 <br>
 
 	User Name :<input type="text" name="username" id="username" value="">

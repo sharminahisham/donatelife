@@ -88,9 +88,9 @@
 					<?php 
 						if (isset($result) and $result != FALSE) {
 							foreach ($result as $key => $value)
-							{
-								echo '<option value="'.$value->id.'"'.set_select('hospital',$value->name).'>'.$value->name.'</option>';
-							}
+							{?>
+								<option value="<?php echo $value->id ?>" <?php echo set_select('hospital',$value->name) ?>> <?php echo $value->name ?></option>
+							<?php }
 						}?>
 						
 					</select>

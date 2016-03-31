@@ -13,12 +13,16 @@ class Home_Controller extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper(['url', 'form']);
-		$this->load->library(['form_validation','table']);
+		$this->load->library(['form_validation','table','session']);
 		$this->load->model('Donor_Model');
 		$this->load->model('Hospital_Model');
 	}
 		
 
+	public function sessionch()
+	{
+		var_dump($_SESSION);
+	}
 	public function index()
 	{
 		$this->load->view('home');
@@ -51,7 +55,7 @@ class Home_Controller extends CI_Controller
 		 $this->form_validation->set_rules('gender', 'gender', 'required');
 		 $this->form_validation->set_rules('bloodgroup', 'bloodgroup', 'required');
 		 $this->form_validation->set_rules('hospital', 'hospitalname', 'required');
-		 $this->form_validation->set_rules('mobile', 'mobile','required');
+		 $this->form_validation->set_rules('mobile', 'mobile','required|max_length[5]');
 		 $this->form_validation->set_rules('email', 'email','required');
 
 	  if($this->form_validation->run() === FALSE)
@@ -87,7 +91,7 @@ class Home_Controller extends CI_Controller
 			{
 				$data['message'] = '<script type = "text/javaScript">
 										alert("success!");
-										window.location = "'.base_url('Admin_Controller/view').'";
+										window.location = "'.base_url('Home_Controller/add_donor').'";
 									</script>';
 				$this->load->view('registration',$data);
 			}
@@ -96,7 +100,7 @@ class Home_Controller extends CI_Controller
 			{
 				$data['error'] = '<script type = "text/javaScript">
 										alert("Failed!");
-										window.location = "'.base_url('Admin_Controller/view').'";
+										window.location = "'.base_url('Home_Controller/add_donor').'";
 									</script>';
 				$this->load->view('registration',$data);
 			}
@@ -107,6 +111,12 @@ class Home_Controller extends CI_Controller
 			// 	echo "Data Entry is Success";
 			// }
 		}
+	}
+
+
+	public function add_hospital()
+	{
+		$this->load->view('hospital_registration');
 	}
 
 	
