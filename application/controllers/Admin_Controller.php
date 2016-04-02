@@ -49,8 +49,20 @@ class Admin_Controller extends Check_Logged
 					'logged_in' => true
 				];
 				$this->session->set_userdata('logged_in', $userdata);
-				redirect(base_url('Admin_Controller/view'));
+				redirect(base_url('Admin_Controller/dashboard'));
 			}
+		}
+	}
+
+	public function dashboard($page = 'dashboard') 
+	{
+		if($this->logged == true)
+		{
+			$this->load->view('admin/dashboard');
+		}
+		else
+		{
+			redirect(base_url('Admin_Controller/login'));
 		}
 	}
 
@@ -77,6 +89,32 @@ class Admin_Controller extends Check_Logged
 			// $where = ['statuscode' => '0'];
 			$data = $this->Donor_Model->view_all();
 			if ($data != null) {
+				$template = [
+		                'table_open'            => '<table id="team" class = "table">',
+		                'thead_open'            => '<thead class="header">',
+		                'thead_close'           => '</thead>',
+
+		                'heading_row_start'     => '<tr>',
+		                'heading_row_end'       => '</tr>',
+		                'heading_cell_start'    => '<th>',
+		                'heading_cell_end'      => '</th>',
+
+		                'tbody_open'            => '<tbody>',
+		                'tbody_close'           => '</tbody>',
+
+		                'row_start'             => '<tr>',
+		                'row_end'               => '</tr>',
+		                'cell_start'            => '<td>',
+		                'cell_end'              => '</td>',
+
+		                'row_alt_start'         => '<tr>',
+		                'row_alt_end'           => '</tr>',
+		                'cell_alt_start'        => '<td>',
+		                'cell_alt_end'          => '</td>',
+
+		                'table_close'           => '</table>'
+		            ];
+		            $this->table->set_template($template);
 				$this->table->set_heading('id', 'name', 'blood group', 'states code');
 				foreach ($data as $key => $value) {
 					if($value->statuscode == '0')
@@ -136,6 +174,32 @@ class Admin_Controller extends Check_Logged
 		$data=$this->Hospital_Model->view_all();
 			if($data != null)
 				{
+					$template = [
+		                'table_open'            => '<table id="team" class = "table">',
+		                'thead_open'            => '<thead class="header">',
+		                'thead_close'           => '</thead>',
+
+		                'heading_row_start'     => '<tr>',
+		                'heading_row_end'       => '</tr>',
+		                'heading_cell_start'    => '<th>',
+		                'heading_cell_end'      => '</th>',
+
+		                'tbody_open'            => '<tbody>',
+		                'tbody_close'           => '</tbody>',
+
+		                'row_start'             => '<tr>',
+		                'row_end'               => '</tr>',
+		                'cell_start'            => '<td>',
+		                'cell_end'              => '</td>',
+
+		                'row_alt_start'         => '<tr>',
+		                'row_alt_end'           => '</tr>',
+		                'cell_alt_start'        => '<td>',
+		                'cell_alt_end'          => '</td>',
+
+		                'table_close'           => '</table>'
+		            ];
+		            $this->table->set_template($template);
 					$this->table->set_heading('hospitalname','hospitalcode','address');
 					foreach ($data as $key => $value) 
 						{
