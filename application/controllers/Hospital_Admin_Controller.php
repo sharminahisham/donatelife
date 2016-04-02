@@ -36,7 +36,7 @@ class Hospital_Admin_Controller extends Check_Logged
 	public function logout()
 	{
 		$this->session->unset_userdata('logged_in');
-		redirect(base_url('Admin_Controller/login'));
+		redirect(base_url('Hospital_Admin_Controller/login'));
 	}
 
 	/*verify login*/
@@ -63,17 +63,20 @@ class Hospital_Admin_Controller extends Check_Logged
 					'logged_in' => true
 				];
 				$this->session->set_userdata('logged_in', $userdata);
-				redirect(base_url('Hospital_Admin_Controller'));
+				redirect(base_url('Hospital_Admin_Controller/index'));
 			}
+			else
+			{
 			$data['message'] = 'please try again';
-			$this->load->view('Hospital_Admin_Controller/login',$data);
+			$this->load->view('Hospitsl_Admin_Controller/index',$data);
+		    }
 		}
 	}
 
 
 	public function index()		
 	{ 
-		
+		if($this->logged == true){
 		$data=$this->Donor_Model->view(['statuscode' => '1']);
 
 		if($data != null)
@@ -93,6 +96,12 @@ class Hospital_Admin_Controller extends Check_Logged
 				$this->load->view('admin/view_registered_users',$data);
 			}
 		}
+		else
+	    {
+			redirect(base_url('Hospitl_Admin_Controller/login'));
+			
+		}
+	}
 
 
 

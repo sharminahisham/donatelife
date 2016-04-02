@@ -131,6 +131,8 @@ class Admin_Controller extends Check_Logged
 
 	public function view_hospitals()
 	{
+		if($this->logged == true)
+		{
 		$data=$this->Hospital_Model->view_all();
 			if($data != null)
 				{
@@ -148,6 +150,11 @@ class Admin_Controller extends Check_Logged
 					$data['result'] = "No data found";
 					$this->load->view('admin/view_registered_hospitals',$data);
 				}
+		}
+		else
+		{
+			redirect(base_url('Admin_Controller/login'));
+		}		
 	}
 
 	public function accept()
