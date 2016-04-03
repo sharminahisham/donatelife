@@ -67,7 +67,6 @@ $route['accepting'] = 'Admin_Controller/view_donor';
 
 /*hospital*/
 $route['dashboard/hospitals'] = 'Admin_Controller/view_hospitals';
-$route['hospital/login'] = 'Hospital_Admin_Controller/login';
 $route['hregister'] = 'Hospital_Controller/hospital_registration';
 $route['accepteduser'] = 'Hospital_Admin_Controller/accept';
 $route['selecteduser'] = 'Hospital_Admin_Controller/view_donor';
@@ -75,8 +74,22 @@ $route['report'] = 'Lab_Controller/add_report';
 $route['reportview'] = 'Lab_Controller/view';
 
 
+/////////HOSPITAL ADMIN//////////////
+
+$route['hospital-login'] = 'Hospital_Admin_Controller/login';
+$route['hospital_dashboard'] = 'Hospital_Admin_Controller/dashboard';
+$route['hospital_dashboard/login'] = 'Hospital_Admin_Controller/login';
+$route['hospital_dashboard/logout'] = 'Hospital_Admin_Controller/logout';
+
+
+/*donor*/
+$route['hospital_dashboard/donors'] = 'Hospital_Admin_Controller';
+
+
+/////////////////////////////////////
 /*donors*/
 $route['dashboard/donors'] = 'Admin_Controller/view';
+
 
 
 /*appication routes*/

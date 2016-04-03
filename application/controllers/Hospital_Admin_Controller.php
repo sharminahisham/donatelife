@@ -15,28 +15,40 @@ class Hospital_Admin_Controller extends Check_Logged
 		$this->load->model('User_Model');
 	}
 
+
+	public function dashboard()
+	{
+		if ($this->logged['type'] == 'hospital' and $this->logged['logged_in'] == true ) {
+			$this->load->view('hospital/hospital_dashboard');
+		}
+		else
+			redirect(base_url('hospital-login'));
+	}
+
+
 	public function users($page='acceptedusers')
 	{
-		if ($this->logged == true ) {
+		if ($this->logged['type'] == 'hospital' ) {
 			$data['result'] = $this->Hospital_Admin_Model->view_all();
 			$this->load->view($page,$data);
 		}
 		else
 		{
-			redirect(base_url('hospital/login'));
+			redirect(base_url('hospital-login'));
 		}
 	}
 
 	
 	public function login()
 	{
-		$this->load->view('admin/hospital_login');
+
+		$this->load->view('hospital/hospital_login');
 	}
 
 	public function logout()
 	{
 		$this->session->unset_userdata('logged_in');
-		redirect(base_url('Hospital_Admin_Controller/login'));
+		redirect(base_url('hospital-login'));
 	}
 
 	/*verify login*/
@@ -47,7 +59,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		$this->form_validation->set_rules('password', 'password','required');
 
 		if ($this->form_validation->run() === FALSE) {
-			$this->load->view('admin/hospital_login');
+			$this->load->view('hospital/hospital_login');
 		}
 		else
 		{
@@ -63,12 +75,12 @@ class Hospital_Admin_Controller extends Check_Logged
 					'logged_in' => true
 				];
 				$this->session->set_userdata('logged_in', $userdata);
-				redirect(base_url('Hospital_Admin_Controller/index'));
+				redirect(base_url('hospital_dashboard'));
 			}
 			else
 			{
 			$data['message'] = 'please try again';
-			$this->load->view('Hospitsl_Admin_Controller/index',$data);
+			$this->load->view('hospital/hospital_login',$data);
 		    }
 		}
 	}
@@ -81,6 +93,32 @@ class Hospital_Admin_Controller extends Check_Logged
 
 		if($data != null)
 			{
+				$template = [
+		                'table_open'            => '<table id="team" class = "table">',
+		                'thead_open'            => '<thead class="header">',
+		                'thead_close'           => '</thead>',
+
+		                'heading_row_start'     => '<tr>',
+		                'heading_row_end'       => '</tr>',
+		                'heading_cell_start'    => '<th>',
+		                'heading_cell_end'      => '</th>',
+
+		                'tbody_open'            => '<tbody>',
+		                'tbody_close'           => '</tbody>',
+
+		                'row_start'             => '<tr>',
+		                'row_end'               => '</tr>',
+		                'cell_start'            => '<td>',
+		                'cell_end'              => '</td>',
+
+		                'row_alt_start'         => '<tr>',
+		                'row_alt_end'           => '</tr>',
+		                'cell_alt_start'        => '<td>',
+		                'cell_alt_end'          => '</td>',
+
+		                'table_close'           => '</table>'
+		            ];
+		            $this->table->set_template($template);
 				$this->table->set_heading('Id','Name','Gender','Date of Birth','Address','Blood Group','status code');
 				foreach ($data as $key => $value) 
 					{
@@ -88,12 +126,12 @@ class Hospital_Admin_Controller extends Check_Logged
 					}
 
 				$data['result'] = $this->table->generate();
-				$this->load->view('admin/view_registered_users',$data);
+				$this->load->view('hospital/view_registered_users',$data);
 			}
 		else
 			{
 				$data['result'] = "No data found";
-				$this->load->view('admin/view_registered_users',$data);
+				$this->load->view('hospital/view_registered_users',$data);
 			}
 		}
 		else
@@ -122,7 +160,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		$result = $this->Donor_Model->view(['id' => $id]);
 		if ($result != FALSE) {
 			$data['result'] = $result;
-			$this->load->view('admin/view_acceptedusers',$data);
+			$this->load->view('hospital/view_accepted_users',$data);
 
 		}
 	}

@@ -22,7 +22,7 @@ class Check_Logged extends CI_Controller
 	{
         if($this->session->userdata('logged_in') != null)
         {
-        	return TRUE;
+        	return $this->session->userdata('logged_in');
 
         }
         else

@@ -12,8 +12,7 @@
 			<?php echo validation_errors();?>
 		<h2>MEDICAL REPORT</h2>
         <br><br>
-
-		DATE<input type="date" name="testdate" id="testdate" value="<?php echo set_value('testdate'); ?>"><br><br>
+         DATE<input type="date" name="testdate" id="testdate" value="<?php echo set_value('testdate'); ?>"><br><br>
 		TIME<input type="time" name="testtime" id="testtime" value="<?php echo set_value('testtime'); ?>"><br><br>
 		TOKEN NO<input type="text" name="tokenno" id="tokenno" value="<?php echo set_value('tokenno'); ?>"><br><br>
 		FORWADED BY<input type="text" name="forwadedby" id="forwadedby" value="<?php echo set_value('forwadedby'); ?>"><br><br>

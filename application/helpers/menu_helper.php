@@ -110,6 +110,7 @@ function dashboard_menu($current)
             'icon' => 'fa-picture-o',
             'link' => 'donors'
         ]
+        
     ];
 
     $html = '';
@@ -121,7 +122,7 @@ function dashboard_menu($current)
                 <img class="img-responsive img-circle center-block" src="'.base_url().'" alt="User">
               </div>
               <div class="user-id text-center">
-                <span class="">Jamia</span>
+                <span class="">Donate</span>
               </div>
             </li>';
     foreach ($menu as $key => $value) {
@@ -136,5 +137,46 @@ function dashboard_menu($current)
       </nav>';
     return $html;
 
+}
+
+
+function hospital_menu($current)
+{
+    $menu = [
+        'dashboard' => [
+            'title' => 'dashboard',
+            'icon' => 'fa-tachometer',
+            'link' => ''
+        ],
+        'donors' => [
+            'title' => 'donors',
+            'icon' => 'fa-folder',
+            'link' => 'donors'
+        ]
+    ];
+
+    $html = '';
+    $html .='<nav class="sidebar-left">
+        <div class="">
+          <ul class="menu-left">
+            <li>
+              <div class="user-img">
+                <img class="img-responsive img-circle center-block" src="'.base_url().'" alt="User">
+              </div>
+              <div class="user-id text-center">
+                <span class="">Donate</span>
+              </div>
+            </li>';
+    foreach ($menu as $key => $value) {
+        if ($current == $key) {
+            $html .='<li><a href="'.base_url('hospital_dashboard/'.$value['link']).'" class="active">'.ucfirst($key).' &nbsp;<i class="menu-icon fa '.$value['icon'].' pull-right"></i></a></li>';
+        } else {
+            $html .='<li><a href="'.base_url('hospital_dashboard/'.$value['link']).'" class="">'.ucfirst($key).' &nbsp;<i class="menu-icon fa '.$value['icon'].' pull-right"></i></a></li>';
+        }
+    }
+    $html .= '</ul>
+        </div>
+      </nav>';
+    return $html;   
 }
 

@@ -6,14 +6,14 @@
   <meta name="description" content="Psybo technologies is a small web design &amp; development agency based in Manjeri, Malappuram, INDIA. We've made a reputation for building websites that look great and are easy-to-use.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="<?php echo base_url('img/ico.png');?>" type="image/png" sizes="47x54">
-	<title> kudumba sree</title>
+	<title> donate life</title>
   <link rel="stylesheet" href="<?php echo base_url('css/styleapp.css');?>">
   <script type="text/javascript" src="<?php echo base_url('js/appjs.js');?>"></script>
 </head>
 <body>
 	<div class="page-wrapper">
 		<div class="left-wrapper">
-            <?php echo dashboard_menu('dashboard');?>
+            <?php echo hospital_menu('dashboard');?>
 		</div>
 		<nav class="top-wrapper">
 			<div class="sidebar-top">
