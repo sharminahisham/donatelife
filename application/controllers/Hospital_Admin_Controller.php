@@ -13,6 +13,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		$this->load->library(['form_validation','table']);
 		$this->load->model('Donor_Model');
 		$this->load->model('User_Model');
+		$this->load->model('Tocken_Details_Model');
 	}
 
 
@@ -85,7 +86,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		}
 	}
 
-
+    /* accepted users*/
 	public function index()		
 	{ 
 		if($this->logged == true){
@@ -164,13 +165,112 @@ class Hospital_Admin_Controller extends Check_Logged
 
 		}
 	}
+
+	/* tocken details*/
+		
+	public function view_lab_request()
+	{
 			
+			
+		$data = $this->Tocken_Details_Model->view_all();
+		if ($data != null) 
+			{
+                 //var_dump($data);
+				$this->table->set_heading('id','name','hospital_id','testdate','testtime','tokenno','verificationcode');
+				foreach ($data as $key => $value)
+
+				{
+					$this->table->add_row($value->id, $value->name, $value->hospital_id, $value->testdate, $value->testtime,$value->tockenno ,$value->verificationcode);
+				}
+
+				$data['result'] = $this->table->generate();
+				$this->load->view('admin/view_accepted_users',$data);
+
+			}
+		else
+			{
+				$data['result'] = 'No data found';
+				$this->load->view('admin/view_tocken',$data);
+			}
+	}
+
+	public function view_accepted_users($id)
+	{ 
+
+		$result = $this->Tocken_Details_Model->view(['id' => $id]);
+		if ($result != FALSE) 
+		{
+			$data['result'] = $result;
+			$this->load->view('hospital/view_lab_request',$data);
+
+		}
+	}
+
+
+
+	   
+		public function add_report()
+		{
+			$this->load->view('hospital/make_lab_report');
+		}	
+
+
+		public function add_tocken()
+		{
+			//validation
+                  
+	     $this->form_validation->set_rules('testdate', 'testdate', 'required');
+		 $this->form_validation->set_rules('testtime', 'testtime', 'required');
+		 $this->form_validation->set_rules('tockenno', 'tockenno', 'required');
+		 $this->form_validation->set_rules('verificationcode', 'verificationcode', 'required');
+         
+        if($this->form_validation->run() === FALSE)
+			{
+				$data['result'] = $this->Tocken_Details_Model->view_all();
+				$this->load->view('hospital/view_accepted_users',$data);
+			}
+		else
+		{
+			$testdate = $this->input->post('testdate');
+			$testtime = $this->input->post('testtime');
+			$tockenno= $this->input->post('tockenno');
+			$verificationcode = $this->input->post('verificationcode');	
+            $donor_id=$this->input->post('donor_id');
+            $hospital_id=$this->input->post('hospital_id');
+
+			$data = [
+						'testdate' => $testdate,
+						'testtime' => $testtime,
+						'tockenno'=> $tockenno,
+						'verificationcode'=> $verificationcode,
+						'donor_id'=>$donor_id,
+						'hospital_id'=>$hospital_id,
+			        ];
+
+			   if($this->Tocken_Details_Model->add($data))
+			{
+				$data['message'] = '<script type = "text/javaScript">
+										alert("success!");
+										window.location = "'.base_url('Hospital_Admin_Controller/view_lab_request').'";
+									</script>';
+				$this->load->view('admin/view_tocken',$data);
+			}
+			
+			else
+			{
+				$data['error'] = '<script type = "text/javaScript">
+										alert("Failed!");
+										window.location = "'.base_url('Hospital_Admin_Controller/view_donor').'";
+									</script>';
+				$this->load->view('admin/view_tocken',$data);
+			}
+	    }
+			//add details to tocken_details table
+
+				// update donor table set tocken = true
+
+		}
+	
 		
 }
-
-
-
-
-
-
- ?>
+?>

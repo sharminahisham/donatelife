@@ -23,23 +23,7 @@ class Lab_Controller extends CI_Controller
 
 	public function view()
 	{
-		$data = $this->Lab_Model->view();
-		if ($data != null) {
-			$this->table->set_heading('date', 'time', 'tokenno', 'forwadedby','forwadedto','medicalreport');
-			foreach ($data as $key => $value) {
-				
-					$this->table->add_row($value->testdate, $value->testtime, $value->tokenno, $value->forwadedby,$value->forwadedto,$value->medicalreport );
-
-			}
-			$data['result'] = $this->table->generate();
-			$this->load->view('admin/view_lab',$data);
-
-		}
-		else
-		{
-			$data['result'] = 'no data found';
-			$this->load->view('admin/view_lab',$data);
-		}
+		
 	}
 	public function add_report()
 	{
@@ -64,8 +48,7 @@ class Lab_Controller extends CI_Controller
 				$forwadedby = $this->input->post('forwadedby');
 				$forwadedto= $this->input->post('forwadedto');
 	            $medicalreport = $this->input->post('medicalreport');
-
-
+	            
 				$data = [
 
 					'testdate' => $testdate,
@@ -73,7 +56,8 @@ class Lab_Controller extends CI_Controller
 					'tokenno' => $tokenno,
 					'forwadedby' => $forwadedby,
 					'forwadedto' => $forwadedto,
-					'medicalreport' =>$medicalreport,	
+					'medicalreport' =>$medicalreport,
+						
 				   
 			    ];
 

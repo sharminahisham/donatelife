@@ -150,8 +150,13 @@ function hospital_menu($current)
         ],
         'donors' => [
             'title' => 'donors',
-            'icon' => 'fa-folder',
+            'icon' => 'fa-picture-o',
             'link' => 'donors'
+        ],
+        'lab' => [
+            'title' => 'lab',
+            'icon' => 'fa-folder',
+            'link' => 'lab'
         ]
     ];
 
@@ -164,7 +169,7 @@ function hospital_menu($current)
                 <img class="img-responsive img-circle center-block" src="'.base_url().'" alt="User">
               </div>
               <div class="user-id text-center">
-                <span class="">Donate</span>
+                <span class="">Hospital admin</span>
               </div>
             </li>';
     foreach ($menu as $key => $value) {

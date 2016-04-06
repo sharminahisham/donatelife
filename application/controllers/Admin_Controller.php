@@ -117,10 +117,11 @@ class Admin_Controller extends Check_Logged
 		            $this->table->set_template($template);
 				$this->table->set_heading('id', 'name', 'blood group', 'states code');
 				foreach ($data as $key => $value) {
-					if($value->statuscode == '0')
+					if($value->statuscode == '0'){
 						$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode,'<a href='.base_url('Admin_Controller/view_donor/'.$value->id).'>accept</a>','<a href="'.base_url('Admin_Controller/reject/'.$value->id).'">reject</a>');
+					}
 					else
-						$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode);
+						$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, $value->statuscode);
 
 				}
 				$data['result'] = $this->table->generate();
@@ -304,7 +305,23 @@ class Admin_Controller extends Check_Logged
 			    }
 	}
 		
-    
+    public function view_donor_details($id)
+    {
+
+  		if($this->logged == true)
+		{
+			$result = $this->Donor_Model->view(['id' => $id]);
+			if ($result != FALSE) {
+				$data['result'] = $result;
+				$this->load->view('admin/view_donor_details',$data);
+			}
+
+		}
+		else
+		{
+			redirect(base_url('Admin_Controller/login'));
+		}  	
+    }
 
 }
 

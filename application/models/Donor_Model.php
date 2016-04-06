@@ -60,7 +60,8 @@ class Donor_Model extends CI_Model
     	if($this->db->insert($this->table, $data))
 		{
 			return $this->db->insert_id();
-		}else
+		}
+		else
 		{
 			return FALSE;
 		}

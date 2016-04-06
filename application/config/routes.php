@@ -59,6 +59,10 @@ $route['logout'] = 'Admin_Controller/logout';
 $route['registration'] = 'Home_Controller/registration';
 
 
+/*donor*/
+
+$route['dashboard/donors/(:num)'] = 'Admin_Controller/view_donor_details/$1';
+$route['dashboard/donors/view_donor_details'] = 'Admin_Controller/view_donor_details';
 /*dashboard*/
 
 $route['dashboard'] = 'Admin_Controller/dashboard';
@@ -84,6 +88,9 @@ $route['hospital_dashboard/logout'] = 'Hospital_Admin_Controller/logout';
 
 /*donor*/
 $route['hospital_dashboard/donors'] = 'Hospital_Admin_Controller';
+
+/*lab*/
+$route['hospital_dashboard/lab'] = 'Hospital_Admin_Controller/view_lab_request';
 
 
 /////////////////////////////////////

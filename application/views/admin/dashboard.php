@@ -13,7 +13,7 @@
 <body>
 	<div class="page-wrapper">
 		<div class="left-wrapper">
-            <?php echo hospital_menu('dashboard');?>
+            <?php echo dashboard_menu('dashboard');?>
 		</div>
 		<nav class="top-wrapper">
 			<div class="sidebar-top">

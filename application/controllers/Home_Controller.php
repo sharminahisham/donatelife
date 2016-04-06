@@ -55,7 +55,7 @@ class Home_Controller extends CI_Controller
 		 $this->form_validation->set_rules('gender', 'gender', 'required');
 		 $this->form_validation->set_rules('bloodgroup', 'bloodgroup', 'required');
 		 $this->form_validation->set_rules('hospital', 'hospitalname', 'required');
-		 $this->form_validation->set_rules('mobile', 'mobile','required|max_length[5]');
+		 $this->form_validation->set_rules('mobile', 'mobile','required|max_length[15]');
 		 $this->form_validation->set_rules('email', 'email','required');
 
 	  if($this->form_validation->run() === FALSE)
