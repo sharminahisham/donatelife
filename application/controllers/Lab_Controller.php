@@ -12,6 +12,7 @@ class Lab_Controller extends CI_Controller
 		$this->load->helper(['url','form',]);
 		$this->load->library(['form_validation','table']);
 		$this->load->model(['Lab_Model']);
+		$this->load->model(['Donor_Model']);
 	}
 
 
@@ -21,42 +22,46 @@ class Lab_Controller extends CI_Controller
 	}
 
 
-	public function view()
-	{
-		
+	public function make_lab_report()
+	{ 
+
+		$result = $this->Lab_Model->view(['id' => $id]);
+		if ($result != FALSE) 
+		{
+			$data['result'] = $result;
+			$this->load->view('admin/make_lab_report',$data);
+
+		}
 	}
+
+
 	public function add_report()
 	{
-		 $this->form_validation->set_rules('testdate', 'testdate', 'required');
-		 $this->form_validation->set_rules('testtime', 'testtime', 'required');
-		 $this->form_validation->set_rules('tokenno', 'tokenno', 'required');
-		 $this->form_validation->set_rules('forwadedby', 'forwadedby', 'required');
-		 $this->form_validation->set_rules('forwadedto', 'forwadedto', 'required');
+		 
+		 $this->form_validation->set_rules('verifiedby', 'verifiedby', 'required');
 		 $this->form_validation->set_rules('medicalreport', 'medicalreport', 'required');
 		
 		 if($this->form_validation->run() === FALSE)
 		{
 		
-			$this->load->view('admin/labreport');
-		 
+			$data['result'] = $this->Lab_Model->view();
+		    $this->load->view('hospital/make_lab_report',$data);
  	    }
  	    else
  	    {
- 	    	$testdate = $this->input->post('testdate');
-				$testtime = $this->input->post('testtime');
-				$tokenno= $this->input->post('tokenno');
-				$forwadedby = $this->input->post('forwadedby');
-				$forwadedto= $this->input->post('forwadedto');
+ 	    	    
+				$verifiedby = $this->input->post('verifiedby');
 	            $medicalreport = $this->input->post('medicalreport');
+	            $donor_id=$this->input->post('donor_id');
+                $hospital_id=$this->input->post('hospital_id');
 	            
 				$data = [
 
-					'testdate' => $testdate,
-					'testtime' => $testtime,
-					'tokenno' => $tokenno,
-					'forwadedby' => $forwadedby,
-					'forwadedto' => $forwadedto,
+					
+					'verifiedby' => $verifiedby,
 					'medicalreport' =>$medicalreport,
+					'donor_id'=>$donor_id,
+					'hospital_id'=>$hospital_id,
 						
 				   
 			    ];

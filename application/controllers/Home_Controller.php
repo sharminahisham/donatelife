@@ -91,7 +91,7 @@ class Home_Controller extends CI_Controller
 			{
 				$data['message'] = '<script type = "text/javaScript">
 										alert("success!");
-										window.location = "'.base_url('Home_Controller/add_donor').'";
+										window.location = "'.($_SERVER['HTTP_REFERER']).'";
 									</script>';
 				$this->load->view('registration',$data);
 			}

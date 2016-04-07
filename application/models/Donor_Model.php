@@ -49,8 +49,20 @@ class Donor_Model extends CI_Model
 
 	public function update( $where, $data)
 	{
+		$this->db->where(['id'=>$where]);
+		$update = $this->db->update('donor', $data);
+		/*$this->db->set($data);
+		var_dump($this->db->get_compiled_update('donor'));*/
+		return $update;
+
+	}
+
+	public function updation( $where, $data)
+	{
 		$this->db->where($where);
 		$update = $this->db->update('donor', $data);
+		$this->db->set($data);
+		//var_dump($this->db->get_compiled_update('donor'));
 		return $update;
 
 	}

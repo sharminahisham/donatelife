@@ -248,7 +248,7 @@ class Admin_Controller extends Check_Logged
 				];
 
 				$where = ['id' => $donor_id];
-				if($this->Donor_Model->update($where, $data) )	
+				if($this->Donor_Model->updation($where, $data) )	
 				{
 					$data['message'] = '<script type="text/Javascript">
 											alert("success");
