@@ -63,7 +63,9 @@
     <input type="text" name="tockenno" id="tockenno"required><br>
     <label for="verificationcode">verification code</label>
     <input type="text" value="<?php echo (random_string('numeric',7)) ?>" name="verificationcode" id="verificationcode"required><br>
-    <button name="submit" id="submit"><a href="<?php echo base_url('Lab_Controller/add_report'); ?>">Submit</a></button>
+
+    <button name="submit" id="submit">Submit</a></button>
+
     <a href="<?php echo base_url('Hospital_Admin_Controller/') ?>">back</a>
     <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
     <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">

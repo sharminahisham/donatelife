@@ -19,7 +19,7 @@
 <body>
   <div class="page-wrapper">
     <div class="left-wrapper">
-      <?php echo hospital_menu('donors');?>
+      <?php echo hospital_menu('lab');?>
     </div>
   
     <nav class="top-wrapper">
@@ -36,17 +36,18 @@
           </li>
         </ul>
       </div>
-    </nav><?php echo form_open(base_url('Lab_Controller/add_report'),['id' => 'addform', 'method' => 'POST','name' => 'addform'])
+    </nav><?php echo form_open(base_url('Lab_Controller/add_report_submit'),['id' => 'addform', 'method' => 'POST','name' => 'addform'])
 	?>
 			<?php echo validation_errors();?>
 		<h2>MEDICAL REPORT</h2>
         <br><br>
-    <?php if(isset($result) &&$result!=FALSE): 
+    <?php if(isset($result) && $result!=FALSE): 
      ?> 
+
         <br>
-        Id : <?php echo $result['0']->id ?><br>
+        Id : <?php echo $result['0']->donor_id ?><br>
         Name : <?php echo $result['0']->name ?><br>
-        Date of birth : <?php echo $result['0']->dob ?><br>
+        Date of birth : <?php //echo $result['0']->dob ?><br>
         Gender : <?php echo $result['0']->gender ?><br>
         Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
         <!-- <?php// if(isset($result) &&$result!=FALSE): 
@@ -54,8 +55,8 @@
         Hospital_Id : <?php echo $result['0']->hospital_id ?><br>
         Testdate : <?php echo $result['0']->testdate ?><br>
         Testtime : <?php echo $result['0']->testtime ?><br>
-        <input type="hidden" name="donor_id" value='<?php echo $result['0']->id ?>'>
-        <input type="hidden" name="hospital_id" value='<?php echo $result['0']->hospital_id ?>'>
+        <input type="hidden" name="donor_id" value='<?php echo $result['0']->donor_id ?>'>
+        <input type="hidden" name="hospital_id" value='<?php echo $result['0']->hospital_id ?>'> 
        <!--  <input type="hidden" name="testdate" value='<?php //echo $result['0']->testdate ?>'>
        <input type="hidden" name="testtime" value='<?php //echo $result['0']->testtime?>'> -->
         
@@ -63,10 +64,10 @@
 		VERIFIED BY<input type="text" name="verifiedby" id="verifiedby" value="<?php echo set_value('verifiedby'); ?>" required><br><br>
 	  MEDICAL REPORT<textarea name="medicalreport" id="medicalreport" value="<?php echo set_value('medicalreport'); ?>" required></textarea><br><br>
 		<input type="submit" value="FORWARD">
-   <!--  <input type="hidden" name="donor_id" id="donor_id" value="<?php// echo $result[0]->id ?>">
-   <input type="hidden" name="hospital_id" id="hospital_id" value="<?php //echo $result[0]->hospital_id ?>">
-   <input type="hidden" name="testdate" id="testdate" value="<?php //echo $result[0]->testdate ?>">
-   <input type="hidden" name="testtime" id="testtime" value="<?php //echo $result[0]->testtime ?>">
+   <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->donor_id ?>">
+   <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
+   <!-- <input type="hidden" name="testdate" id="testdate" value="<?php //echo $result[0]->testdate ?>">
+   <input type="hidden" name="testtime" id="testtime" value="<?php //echo $result[0]->testtime ?>"> -->
    </form> -->
 <?php 
 endif; ?> 

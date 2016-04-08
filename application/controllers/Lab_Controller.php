@@ -13,6 +13,7 @@ class Lab_Controller extends CI_Controller
 		$this->load->library(['form_validation','table']);
 		$this->load->model(['Lab_Model']);
 		$this->load->model(['Donor_Model']);
+		$this->load->model(['Tocken_Details_Model']);
 	}
 
 
@@ -22,25 +23,26 @@ class Lab_Controller extends CI_Controller
 	}
 
 
-	public function make_lab_report()
+	public function make_lab_report($id)
 	{ 
-
-		$result = $this->Lab_Model->view(['id' => $id]);
+        
+		$result = $this->Tocken_Details_Model->view_join(['donor.id' => $id]);
 		if ($result != FALSE) 
 		{
 			$data['result'] = $result;
-			$this->load->view('admin/make_lab_report',$data);
+			$this->load->view('hospital/make_lab_report',$data);
 
 		}
 	}
 
 
-	public function add_report()
+	public function add_report_submit()
 	{
 		 
 		 $this->form_validation->set_rules('verifiedby', 'verifiedby', 'required');
 		 $this->form_validation->set_rules('medicalreport', 'medicalreport', 'required');
-		
+		/* $this->db->select('name,dob,gender,bloodgroup');
+         $this->db->from('donor');*/
 		 if($this->form_validation->run() === FALSE)
 		{
 		

@@ -51,6 +51,23 @@ class Lab_Model extends CI_Model
           return FALSE; 
        }
 	}
+
+	public function view_where($where)
+	{
+		$this->db->where($where);
+		$query = $this->db->get($this->table);
+		if($query)
+		{
+			if($query->num_rows() >= 1)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+	}
 }
 
 

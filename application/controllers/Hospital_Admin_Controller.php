@@ -175,57 +175,57 @@ class Hospital_Admin_Controller extends Check_Logged
 	public function view_lab_request()
 	{
 		if($this->logged == true){
-		$data=$this->Tocken_Details_Model->view_all(['tockenno' => 'TRUE']);
+		$data=$this->Tocken_Details_Model->view_all();
 			
 		if($data != null)
-			{
-				$template = [
-		                'table_open'            => '<table id="team" class = "table">',
-		                'thead_open'            => '<thead class="header">',
-		                'thead_close'           => '</thead>',
+		{
+			$template = [
+	                'table_open'            => '<table id="team" class = "table">',
+	                'thead_open'            => '<thead class="header">',
+	                'thead_close'           => '</thead>',
 
-		                'heading_row_start'     => '<tr>',
-		                'heading_row_end'       => '</tr>',
-		                'heading_cell_start'    => '<th>',
-		                'heading_cell_end'      => '</th>',
+	                'heading_row_start'     => '<tr>',
+	                'heading_row_end'       => '</tr>',
+	                'heading_cell_start'    => '<th>',
+	                'heading_cell_end'      => '</th>',
 
-		                'tbody_open'            => '<tbody>',
-		                'tbody_close'           => '</tbody>',
+	                'tbody_open'            => '<tbody>',
+	                'tbody_close'           => '</tbody>',
 
-		                'row_start'             => '<tr>',
-		                'row_end'               => '</tr>',
-		                'cell_start'            => '<td>',
-		                'cell_end'              => '</td>',
+	                'row_start'             => '<tr>',
+	                'row_end'               => '</tr>',
+	                'cell_start'            => '<td>',
+	                'cell_end'              => '</td>',
 
-		                'row_alt_start'         => '<tr>',
-		                'row_alt_end'           => '</tr>',
-		                'cell_alt_start'        => '<td>',
-		                'cell_alt_end'          => '</td>',
+	                'row_alt_start'         => '<tr>',
+	                'row_alt_end'           => '</tr>',
+	                'cell_alt_start'        => '<td>',
+	                'cell_alt_end'          => '</td>',
 
-		                'table_close'           => '</table>'
-		        ];
-		        $this->table->set_template($template);	
-				$data = $this->Tocken_Details_Model->view_all();
-				if ($data != null) 
+	                'table_close'           => '</table>'
+	        ];
+	        $this->table->set_template($template);	
+	  //       $where = ['report' => 'generated'];
+			// $data = $this->Tocken_Details_Model->view_join($where);
+			// if ($data != false) 
+			// 	{
+	                 //var_dump($data);
+					$this->table->set_heading('Id' , 'Name' , 'Hospital_id' , 'Testdate' , 'Testtime' , 'Tokenno' , 'Verificationcode');
+					foreach ($data as $key => $value)
+
 					{
-		                 //var_dump($data);
-						$this->table->set_heading('Id' , 'Name' , 'Hospital_id' , 'Testdate' , 'Testtime' , 'Tokenno' , 'Verificationcode');
-						foreach ($data as $key => $value)
-
-						{
-							$this->table->add_row($value->donor_id, anchor(base_url('dashboard/donors/'.$value->donor_id),$value->name), $value->hospital_id, $value->testdate, $value->testtime,$value->tockenno ,$value->verificationcode);
-						}
-
-						$data['result'] = $this->table->generate();
-						$this->load->view('admin/view_tocken',$data);
-
+						$this->table->add_row($value->donor_id, anchor(base_url('Lab_Controller/make_lab_report/'.$value->donor_id),$value->name), $value->hospital_id, $value->testdate, $value->testtime,$value->tockenno ,$value->verificationcode);
 					}
-				}
-	
+
+					$data['result'] = $this->table->generate();
+					$this->load->view('hospital/view_tocken',$data);
+
+				// }
+			}
 					else
 					{
-							$data['result'] = 'No data found';
-							$this->load->view('admin/view_tocken',$data);
+						$data['result'] = 'No data found';
+						$this->load->view('hospital/view_tocken',$data);
 					}
 		}
 		else
@@ -286,6 +286,7 @@ class Hospital_Admin_Controller extends Check_Logged
 						'verificationcode'=> $verificationcode,
 						'donor_id'=>$donor_id,
 						'hospital_id'=>$hospital_id,
+						'report' => 'false'
 			        ];
 			$datas = [ 
 			        	'tockenno'=> $tockenno,
@@ -297,7 +298,7 @@ class Hospital_Admin_Controller extends Check_Logged
 			{
 				$data['message'] = '<script type = "text/javaScript">
 										alert("success!");
-										window.location = "'.base_url('Lab_Controller/add_report').'";
+										window.location = "'.base_url('hospital_dashboard/donors').'";
 									</script>';
 				$this->load->view('admin/view_tocken',$data);
 			}
@@ -306,7 +307,7 @@ class Hospital_Admin_Controller extends Check_Logged
 			{
 				$data['error'] = '<script type = "text/javaScript">
 										alert("Failed!");
-										window.location = "'.base_url('hospital_dashboard/lab').'";
+										window.location = "'.base_url('hospital_dashboard/donors').'";
 									</script>';
 				$this->load->view('admin/view_tocken',$data);
 			}

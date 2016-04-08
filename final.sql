@@ -37,12 +37,13 @@ CREATE TABLE `donor` (
   `statuscode` varchar(10) DEFAULT NULL,
   `hospital_id` int(11) DEFAULT NULL,
   `opinion_id` int(11) DEFAULT NULL,
+  `tockenno` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_donor_hospital1_idx` (`hospital_id`),
   KEY `fk_donor_opinion1_idx` (`opinion_id`),
   CONSTRAINT `fk_donor_hospital1` FOREIGN KEY (`hospital_id`) REFERENCES `hospital` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_donor_opinion1` FOREIGN KEY (`opinion_id`) REFERENCES `opinion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +52,6 @@ CREATE TABLE `donor` (
 
 LOCK TABLES `donor` WRITE;
 /*!40000 ALTER TABLE `donor` DISABLE KEYS */;
-INSERT INTO `donor` VALUES (1,'user 1','manjeri','1975-01-01','male','o-','hospital1@hospital.com','8659',NULL,NULL,NULL,'1',1,1),(2,'user2','sdfghjkl','1975-01-01','male','b-','ppp@kk.com','2542',NULL,NULL,NULL,'1',1,2),(3,'user2','sdfghjkl','1975-01-01','male','b-','ppp@kk.com','2542',NULL,NULL,NULL,'FALSE',1,NULL),(4,'user3','user3 address','1975-01-01','male','o-','info@klkk.comgreshytr','52',NULL,NULL,NULL,'1',1,3),(5,'user3','user3 address','1975-01-01','male','o-','info@klkk.comgreshytr','52',NULL,NULL,NULL,'1',1,6),(6,'anu','adchgku','1993-05-04','female','ab+','abc@gmail.com','54125',NULL,NULL,NULL,'1',1,4),(7,'anu','adchgku','1993-05-04','female','ab+','abc@gmail.com','54125',NULL,NULL,NULL,'FALSE',1,NULL),(8,'xdhxd','zdfsdg','1975-01-01','female','a-','abc@gmail.com','1235',NULL,NULL,NULL,'1',1,5),(9,'uhu','hbjhb','1975-01-03','male','ab-','in@hbjh.com','85245',NULL,NULL,NULL,'1',2,7),(10,'uhu','jygj','1975-01-03','male','b+','in@hbjh.com','85245',NULL,NULL,NULL,'0',3,NULL);
 /*!40000 ALTER TABLE `donor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +73,7 @@ CREATE TABLE `hospital` (
   `username` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `hospital` (
 
 LOCK TABLES `hospital` WRITE;
 /*!40000 ALTER TABLE `hospital` DISABLE KEYS */;
-INSERT INTO `hospital` VALUES (1,NULL,'hospital3','00215','ngvhgbknl','mm@gh.com','8445','hospital3','hospital3'),(2,NULL,'fdxfgc','123','fgvjn','abc@gmail.com','123654','asdd','qwert'),(3,NULL,'fw','23','fva','abc@gmail.com','1213','wrfdsc','wfWD'),(4,NULL,'42334dfyg','3543','fgjjhgbhgGgg','abc@gmail.com','12365','dyghc','dtdfuy');
+INSERT INTO `hospital` VALUES (1,NULL,'hospital3','00215','ngvhgbknl','mm@gh.com','8445','hospital3','hospital3'),(2,NULL,'fdxfgc','123','fgvjn','abc@gmail.com','123654','asdd','qwert'),(3,NULL,'fw','23','fva','abc@gmail.com','1213','wrfdsc','wfWD'),(4,NULL,'42334dfyg','3543','fgjjhgbhgGgg','abc@gmail.com','12365','dyghc','dtdfuy'),(5,NULL,'KMCT','123243','kozhikode','info@gmail.com','1236547890','kkmmcctt','kmct@123'),(6,NULL,'MES','perinthelmanna','wefwafv','info@klkk.com','123543','asdf','qweeadzgv'),(7,NULL,'qwert','12345','sfxdgcbv','info@klkk.comgreshytr','12345','dfxgcngv','asdfgvbn'),(8,NULL,'adf','a234','dgt','asdfadf@asdaasda','fbgh','rsgrsfhd','xrhygfnxr');
 /*!40000 ALTER TABLE `hospital` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `opinion` (
   `type` varchar(100) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `opinion` (
 
 LOCK TABLES `opinion` WRITE;
 /*!40000 ALTER TABLE `opinion` DISABLE KEYS */;
-INSERT INTO `opinion` VALUES (1,'admin','inuf'),(2,'admin','sdfg'),(3,'admin',''),(4,'admin','sdsfgh'),(5,'admin','dxfchghkj'),(6,'admin','dyfyg'),(7,'admin','');
+INSERT INTO `opinion` VALUES (1,'admin','inuf'),(2,'admin','sdfg'),(3,'admin',''),(4,'admin','sdsfgh'),(5,'admin','dxfchghkj'),(6,'admin','dyfyg'),(7,'admin',''),(8,'admin','xfgd'),(9,'admin','dzrfgdrthj'),(10,'admin','qaaxs'),(11,'admin','zfsf'),(12,'admin','goooodddd'),(13,'admin','dgfx'),(14,'admin',''),(15,'admin','sdfvdsv'),(16,'admin','good'),(17,'admin',' hjnh'),(18,'admin','asfzcdxv'),(19,'admin','asd'),(20,'admin','efgerg'),(21,'admin','sadwf'),(22,'admin','cvnc'),(23,'admin','sxgsdv'),(24,'admin','fszg'),(25,'admin','xfgbdfxhb');
 /*!40000 ALTER TABLE `opinion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +134,7 @@ CREATE TABLE `report` (
   KEY `fk_report_hospital1_idx` (`hospital_id`),
   CONSTRAINT `fk_report_donor` FOREIGN KEY (`donor_id`) REFERENCES `donor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_report_hospital1` FOREIGN KEY (`hospital_id`) REFERENCES `hospital` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,6 @@ CREATE TABLE `report` (
 
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
-INSERT INTO `report` VALUES (2,'2016-12-12','00:00:23',32,'sdfdhg','fdfghjol',NULL,0,0,'dfgj'),(3,'2016-12-12','00:00:23',12,'asdf','sdfgkhlkjnb',NULL,0,0,'dfgj'),(4,'2016-12-12','00:00:23',32,'asdf','adac',NULL,0,0,'gfhjkl'),(5,'2016-12-12','00:00:23',12,'asdfd','zdc<v',NULL,0,0,'gfhjkl');
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,16 +156,18 @@ DROP TABLE IF EXISTS `tocken_details`;
 CREATE TABLE `tocken_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `verificationcode` int(10) unsigned DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `time` date DEFAULT NULL,
   `donor_id` int(10) unsigned NOT NULL,
   `hospital_id` int(11) DEFAULT NULL,
+  `testtime` time DEFAULT NULL,
+  `testdate` date DEFAULT NULL,
+  `tockenno` int(10) DEFAULT NULL,
+  `report` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_donor_details_donor1_idx` (`donor_id`),
   KEY `fk_tocken_details_hospital1_idx` (`hospital_id`),
   CONSTRAINT `fk_donor_details_donor1` FOREIGN KEY (`donor_id`) REFERENCES `donor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tocken_details_hospital1` FOREIGN KEY (`hospital_id`) REFERENCES `hospital` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-31 12:29:22
+-- Dump completed on 2016-04-08 11:07:52
