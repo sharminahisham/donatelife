@@ -19,7 +19,7 @@ class Hospital_Admin_Controller extends Check_Logged
 
 	public function dashboard()
 	{
-		if ($this->logged['type'] == 'hospital' and $this->logged['logged_in'] == true ) {
+		if ($_SESSION['type'] == 'hospital' and $this->logged == true ) {
 			$this->load->view('hospital/hospital_dashboard');
 		}
 		else
@@ -68,14 +68,13 @@ class Hospital_Admin_Controller extends Check_Logged
 			$password =  $this->input->post('password');
 
 			$password = md5($password);
-
 			if ($this->User_Model->login($username, $password, 'hospital')) {
 				$userdata = [
 					'username' => $username,
 					'type' => 'hospital',
 					'logged_in' => true
 				];
-				$this->session->set_userdata('logged_in', $userdata);
+				$this->session->set_userdata($userdata);
 				redirect(base_url('hospital_dashboard'));
 			}
 			else
@@ -89,7 +88,7 @@ class Hospital_Admin_Controller extends Check_Logged
     /* accepted users*/
 	public function index()		
 	{ 
-		if($this->logged == true){
+		if($this->logged == true and $_SESSION['type'] == 'hospital'){
 		$data=$this->Donor_Model->view(['statuscode' => '1']);
 
 		if($data != null)
@@ -137,7 +136,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		}
 		else
 	    {
-			redirect(base_url('Hospitl_Admin_Controller/login'));
+			redirect(base_url('login'));
 			
 		}
 	}

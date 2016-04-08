@@ -47,7 +47,7 @@ class Home_Controller extends CI_Controller
 
 	public function add_donor()
 	{
-		 $this->form_validation->set_rules('name', 'name', 'required');
+		 $this->form_validation->set_rules('name', 'name', '');
 		 $this->form_validation->set_rules('date', 'date', 'required');
 		 $this->form_validation->set_rules('month', 'month', 'required');
 		 $this->form_validation->set_rules('year', 'year', 'required');
@@ -56,7 +56,7 @@ class Home_Controller extends CI_Controller
 		 $this->form_validation->set_rules('bloodgroup', 'bloodgroup', 'required');
 		 $this->form_validation->set_rules('hospital', 'hospitalname', 'required');
 		 $this->form_validation->set_rules('mobile', 'mobile','required|max_length[15]');
-		 $this->form_validation->set_rules('email', 'email','required');
+		 $this->form_validation->set_rules('email', 'email');
 
 	  if($this->form_validation->run() === FALSE)
 		{

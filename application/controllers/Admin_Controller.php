@@ -48,27 +48,33 @@ class Admin_Controller extends Check_Logged
 					'type' => 'admin',
 					'logged_in' => true
 				];
-				$this->session->set_userdata('logged_in', $userdata);
-				redirect(base_url('Admin_Controller/dashboard'));
+				$this->session->set_userdata($userdata);
+				redirect(base_url('dashboard'));
+			}
+			else
+			{
+				$data['message'] = 'check your username and password';
+				$this->load->view('admin/login', $data);
 			}
 		}
 	}
 
 	public function dashboard($page = 'dashboard') 
 	{
-		if($this->logged == true)
+		if($this->logged == true and $_SESSION['type'] == 'admin')
 		{
 			$this->load->view('admin/dashboard');
 		}
 		else
 		{
-			redirect(base_url('Admin_Controller/login'));
+			redirect(base_url('login'));
 		}
 	}
 
 	public function login()
 	{
-		if($this->logged == true){
+		if($this->logged == true and $_SESSION['type'] == 'admin')
+		{
 			redirect(base_url('dashboard/view'));
 		}
 		else{
@@ -80,12 +86,13 @@ class Admin_Controller extends Check_Logged
 	public function logout()
 	{
 		$this->session->unset_userdata('logged_in');
-		redirect(base_url('Admin_Controller/login'));
+		$this->session->sess_destroy();
+		redirect(base_url('login'));
 	}
 
 	public function view()
 	{
-		if($this->logged == true){
+		if($this->logged == true and $_SESSION['type'] == 'admin'){
 			// $where = ['statuscode' => '0'];
 			$data = $this->Donor_Model->view_all();
 			if ($data != null) {
@@ -122,6 +129,7 @@ class Admin_Controller extends Check_Logged
 					}
 					else
 						$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, $value->statuscode);
+						$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, ($value->statuscode == 'FALSE' ) ? '<font color="red" >Rejected </font>' : 'accepted');
 
 				}
 				$data['result'] = $this->table->generate();
@@ -137,7 +145,7 @@ class Admin_Controller extends Check_Logged
 		}
 		else
 		{
-			redirect(base_url('Admin_Controller/login'));
+			redirect(base_url('login'));
 			
 		}
 	}
@@ -145,7 +153,7 @@ class Admin_Controller extends Check_Logged
 
 	public function view_donor($id)
 	{
-		if($this->logged == true)
+		if($this->logged == true and $_SESSION['type'] == 'admin')
 		{
 			$result = $this->Donor_Model->view(['id' => $id]);
 			if ($result != FALSE) {
@@ -156,7 +164,7 @@ class Admin_Controller extends Check_Logged
 		}
 		else
 		{
-			redirect(base_url('Admin_Controller/login'));
+			redirect(base_url('login'));
 		}
 	}
 
@@ -170,7 +178,7 @@ class Admin_Controller extends Check_Logged
 
 	public function view_hospitals()
 	{
-		if($this->logged == true)
+		if($this->logged == true and $_SESSION['type'] == 'admin')
 		{
 		$data=$this->Hospital_Model->view_all();
 			if($data != null)
@@ -218,7 +226,7 @@ class Admin_Controller extends Check_Logged
 		}
 		else
 		{
-			redirect(base_url('Admin_Controller/login'));
+			redirect(base_url('login'));
 		}		
 	}
 
@@ -283,7 +291,7 @@ class Admin_Controller extends Check_Logged
 	public function reject($id)
 	{
 	
-			$data= ['statuscode' => 'FALSE'];
+				$data= ['statuscode' => 'FALSE'];
 
 
 	   				$where = ['id' => $id];
@@ -308,7 +316,7 @@ class Admin_Controller extends Check_Logged
     public function view_donor_details($id)
     {
 
-  		if($this->logged == true)
+  		if($this->logged == true and $_SESSION['type'] == 'admin')
 		{
 			$result = $this->Donor_Model->view(['id' => $id]);
 			if ($result != FALSE) {
@@ -319,7 +327,7 @@ class Admin_Controller extends Check_Logged
 		}
 		else
 		{
-			redirect(base_url('Admin_Controller/login'));
+			redirect(base_url('login'));
 		}  	
     }
 

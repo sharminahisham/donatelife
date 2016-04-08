@@ -16,7 +16,7 @@
 				<h2>REGISTRATION FORM</h2>
 				<div class="group width-100">
 					<label for="name">NAME</label>
-					<input type="text" name="name" id="name" value="<?php echo set_value('name');?>">
+					<input type="text" name="name" id="name" value="<?php echo set_value('name');?>" required="">
 					<div class="error">
 						<?php echo form_error('name'); ?>
                     </div>
@@ -58,14 +58,14 @@
 				</div>
 				<div class="group width-100">
 					<label for="ADDRESS">ADDRESS</label>
-					<textarea name="address" id="ADDRESS" cols="10" rows="5"><?php echo set_value('address') ?></textarea>
+					<textarea name="address" id="ADDRESS" cols="10" rows="5" required="" ><?php echo set_value('address') ?></textarea>
 					<div  class="error">
 						<?php echo form_error('address'); ?>
 					</div>
 				</div>
 				<div class="group width-33">
 					<label for="">BLOOD GROUP</label>
-					<select name="bloodgroup">
+					<select name="bloodgroup" >
 						<option value="" selected="" disabled="">select</option>
 						<option value="a+"<?php echo  set_select('bloodgroup', 'a+'); ?> >A+</option>
 						<option value="b+"<?php echo  set_select('bloodgroup', 'b+'); ?> >B+</option>
@@ -83,7 +83,7 @@
 				</div>
 				<div class="group width-33">
 					<label for="hospital">HOSPITALS</label>
-					<select name="hospital" id="hospital">
+					<select name="hospital" id="hospital" required="">
 					<option value="" selected="" disabled="">select</option>
 					<?php 
 						if (isset($result) and $result != FALSE) {
@@ -100,7 +100,7 @@
 				</div>
 				<div class="group width-100">
 					<label for="mobile">NUMBER</label>
-					<input type="tell" name="mobile" id="mobile" value="<?php echo set_value('mobile'); ?>">
+					<input type="tell" name="mobile" id="mobile" value="<?php echo set_value('mobile'); ?>" required="">
 					<div  class="error">
 						<?php echo form_error('mobile'); ?>
 					</div>
