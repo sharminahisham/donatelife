@@ -48,9 +48,9 @@
 	<div id="tooplate_middle_wrapper2">
 		<div id="tooplate_middle">
 
-			<h1>BE ACTIVE<span>with the best coffee</span></h1>
-			
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut lorem id mauris cursus pellentesque. Donec lobortis magna at orci blandit ac lobortis ipsum vestibulum.</p>
+			<!-- <h1>BE ACTIVE<span>with the best coffee</span></h1> -->
+			<h1>Who can <span>become an organ and tissue donor?</span></h1>
+			<p>People can also donate a kidney or part of their liver while they are still alive, though this is usually restricted to those wanting to transform the life of someone they know</p>
 			
 			<a href="#"><span>+</span> More</a>
 			
@@ -62,13 +62,13 @@
     
     <div id="tooplate_content">
     
-        <h2>Welcome to Business Theme</h2>
+        <h2>Welcome to donatelife</h2>
                    
                   
         <div class="image_wrapper fl_img"><img src="<?php echo base_url('images/tooplate_image_01.jpg') ?>" alt="Image 01" /></div>
-		<p><em>Vivamus risus massa, congue ac varius sit amet, tincidunt ut diam. Validate <a href="http://validator.w3.org/check?uri=referer" rel="nofollow"><strong>XHTML</strong></a> and <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow"><strong>CSS</strong></a>.</em></p>
+		<p><em>Which organs and tissues can be donated for transplantation?</em></p>
         
-        <p>Business Theme is a free <a rel="nofollow" href="http://www.tooplate.com">website template</a> for everyone. You may edit and apply this template for any purpose. Credits go to <a rel="nofollow" href="http://www.photovaco.com" target="_blank">Free Photos</a> for photos and <a rel="nofollow" href="http://www.smashingmagazine.com" target="_blank">SmashingMagazine.com</a> for icons. Feel free to adapt and use this template for your websites.</p>
+        <p>Organ and tissue donations can save and significantly improve the lives of many people who are sick or dying. For many people with a serious or critical illness related to organ failure, organ transplantation is the only hope for a healthy life.</p>
         
         <div class="button float_r"><a href="#">More...</a></div>
         
@@ -77,18 +77,18 @@
         
         <div class="col_w270 float_l">
 	        
-			<h2>Our Standards</h2>
+			<h2>Heart donation</h2>
           
-			<div class="image_wrapper2"><img src="<?php echo base_url('images/tooplate_image_02.jpg') ?>" alt="Image 02" /></div>
+			<div class="image_wrapper2"><img src="<?php echo base_url('images/heart.jpeg') ?>" alt="Image 02" /></div>
           
-			<p><em>Curabitur quis augue eget mauris vulputate aliquet eu vel est.</em></p>
+			<p><em>The heart pumps blood around the body, and the blood carries oxygen to all other organs.</em></p>
             
-            <ul class="tooplate_list">
+            <!-- <ul class="tooplate_list">
                 <li>Aenean sollicitudin</li>
                 <li>Euismod eu orci</li>
                 <li>Sollicitudin in eros</li>
                 <li>Maecenas dignissim</li>
-            </ul>
+            </ul> -->
           
 			<div class="button float_r"><a href="#">More...</a></div>
             
@@ -96,13 +96,11 @@
         
         <div class="col_w270 float_r">
         
-          <h2>Our Solutions</h2>
+          <h2>Kidney donation</h2>
             
-            <div class="image_wrapper2"><img src="<?php echo base_url('images/tooplate_image_03.jpg') ?>" alt="Image 03" /></div>
+            <div class="image_wrapper2"><img src="<?php echo base_url('images/kidney.jpeg') ?>" alt="Image 03" /></div>
             
-			<p><em>Quisque adipiscing ultrices massa, sit amet vestibulum neque porta vitae.</em></p>
-            <p>Nunc mi neque, imperdiet sed interdum eu, laoreet in leo. In leo nulla, adipiscing id dictum ac, lacinia vel lectus.</p>
-            <p>Fusce fringilla, dui sed blandit luctus, arcu augue pellentesque dui, vel pretium mi felis in velit. Praesent varius porttitor.</p>
+			<p><em>The main function of the kidneys is to filter waste products from the blood. When the body has taken what it needs from food, </p>
             
             <div class="button float_r"><a href="#">More...</a></div>
                 
@@ -115,16 +113,16 @@
             <h2>Our Services</h2>
             
             <ul class="tooplate_list">
-            <li><a href="#">Praesent turpis erat</a></li>
-            <li><a href="#">Curabitur ullamcorper</a></li>
-            <li><a href="#">Pellentesque adipiscing</a></li>
-            <li><a href="#">Cras rutrum ullamcorper</a></li>
-            <li><a href="#">Mattis vel tempor eu</a></li>
-            <li><a href="#">Praesent diam mauris</a></li>
+            <li><a href="#">blood donation</a></li>
+            <li><a href="#">organ donation</a></li>
+            <li><a href="#">helping donors</a></li>
+            <li><a href="#">supoort donatelife</a></li>
+            <li><a href="#">bood donation camp</a></li>
+            <!-- <li><a href="#">Praesent diam mauris</a></li>
             <li><a href="#">Vivamus risus massa</a></li>
             <li><a href="#">Sodales nec bibendum eu</a></li>
             <li><a href="#">Mauris sapien magna</a></li>
-            <li><a href="#">Etiam sit amet est arcu</a></li>
+            <li><a href="#">Etiam sit amet est arcu</a></li> -->
             </ul>
             <div class="button"><a href="services.html">View All</a></div>
             
@@ -133,9 +131,9 @@
             <h2>Testimonial</h2>
             
             <blockquote>
-            <p>Aliquam tristique, lectus nec condimentum egestas, neque erat posuere purus, sed interdum elit est.</p>
+            <p>I am a Red Cross blood donor that won't give up.  I tried to give blood when I was 18, but was declined in both my junior and senior high school years. Once I got to college, I was deferred again. I was finally able to give blood and have given twice. I love donating blood. The thought of being able to help save three people’s lives every time I go makes me feel like a better person.</p>
             
-            <cite>Smith - <span>Web designer</span></cite>
+            <cite>Smith - <span>donor</span></cite>
             </blockquote>
             
         
