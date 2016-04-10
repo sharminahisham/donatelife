@@ -18,7 +18,8 @@ class Tocken_Details_Model extends CI_Model
 		'donor.id as donor_id',
 		'donor.name',
 		'donor.gender',
-		'donor.bloodgroup'
+		'donor.bloodgroup',
+		'donor.dob'
 	];
 
 	function __construct()

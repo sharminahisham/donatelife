@@ -41,13 +41,16 @@
 			<?php echo validation_errors();?>
 		<h2>MEDICAL REPORT</h2>
         <br><br>
-    <?php if(isset($result) && $result!=FALSE): 
+    <?php if(isset($result) && $result!=FALSE):
+    //if($result[0]->report== null)
+     {
+ 
      ?> 
 
         <br>
         Id : <?php echo $result['0']->donor_id ?><br>
         Name : <?php echo $result['0']->name ?><br>
-        Date of birth : <?php //echo $result['0']->dob ?><br>
+        Date of birth : <?php echo $result['0']->dob ?><br>
         Gender : <?php echo $result['0']->gender ?><br>
         Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
         <!-- <?php// if(isset($result) &&$result!=FALSE): 
@@ -68,11 +71,18 @@
    <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
    <!-- <input type="hidden" name="testdate" id="testdate" value="<?php //echo $result[0]->testdate ?>">
    <input type="hidden" name="testtime" id="testtime" value="<?php //echo $result[0]->testtime ?>"> -->
-   </form> -->
-<?php 
+   </form> 
+   <?php 
+}
+/*else
+{
+?>
+  <?php echo "ALREADY FORWADED";?> <br>
+   <a href="<?php echo base_url('hospital_dashboard/lab/') ?>">back</a>
+<?php
+} */
 endif; ?> 
- <!-- <?php 
- //endif; ?>  -->
+ 
 
 </div>  
 	<?php  
