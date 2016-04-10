@@ -25,7 +25,7 @@ class Home_Controller extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('home');
+		$this->load->view('index');
 
 	}
 
@@ -117,6 +117,12 @@ class Home_Controller extends CI_Controller
 	public function add_hospital()
 	{
 		$this->load->view('hospital_registration');
+	}
+
+
+	public function contact()
+	{
+		$this->load->view('index');
 	}
 
 	
