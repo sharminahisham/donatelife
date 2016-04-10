@@ -37,55 +37,50 @@
         </ul>
       </div>
     </nav>
-  <?php echo form_open(base_url('Hospital_Admin_Controller/add_tocken'), ['id' => 'acceptform','method' => 'POST' , 'name' => 'acceptform']) ?>    
-<?php if(isset($result) &&$result!=FALSE): 
-    //var_dump($result);
-   if($result[0]->tockenno == null)
-    {
 
-?>
-  <br>
-  Id : <?php echo $result['0']->id ?><br>
-  Name : <?php echo $result['0']->name ?><br>
-  Date of birth : <?php echo $result['0']->dob ?><br>
-  Gender : <?php echo $result['0']->gender ?><br>
-  Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
-   <input type="hidden" name="donor_id" value='<?php echo $result['0']->id ?>'>
-   <input type="hidden" name="hospital_id" value='<?php echo $result['0']->hospital_id ?>'>
-    <!-- <?php if($result[0]->tockenno == null){?>
-        ALREADY GOT TOCKEN
-     <?php } ?> -->
-    <label for="testdate">testdate</label>
-    <input type="text" name="testdate" id="testdate" required><br>
-    <label for="testtime">testtime</label>
-    <input type="text" name="testtime" id="testtime"required ><br>
-    <label for="tockenno">tockenno</label>
-    <input type="text" name="tockenno" id="tockenno"required><br>
-    <label for="verificationcode">verification code</label>
-    <input type="text" value="<?php echo (random_string('numeric',7)) ?>" name="verificationcode" id="verificationcode"required><br>
-
-    <button name="submit" id="submit">Submit</a></button>
-
-    <a href="<?php echo base_url('Hospital_Admin_Controller/') ?>">back</a>
-    <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
-    <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
-  </form>
 <?php 
-}
-else{
-?>
-  <br>
-  Id : <?php echo $result['0']->id ?><br>
-  Name : <?php echo $result['0']->name ?><br>
-  Date of birth : <?php echo $result['0']->dob ?><br>
-  Gender : <?php echo $result['0']->gender ?><br>
-  Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
-  <?php echo "ALREADY GOT TOCKEN";?> <br>
-  <a href="<?php echo base_url('Hospital_Admin_Controller/') ?>">back</a>
-<?php }
-endif; ?>	
+if(isset($result) && $result != FALSE) 
+{
+  if($result[0]->tockenno != null) { ?>
+       <br>
+        Id : <?php echo $result['0']->id ?><br>
+        Name : <?php echo $result['0']->name ?><br>
+        Date of birth : <?php echo $result['0']->dob ?><br>
+        Gender : <?php echo $result['0']->gender ?><br>
+        Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
+        <?php echo "ALREADY GOT TOCKEN";?> <br>
+        <a href="<?php echo base_url('Hospital_Admin_Controller/') ?>">back</a> 
+    <?php } ?>
+     <br>
+      Id : <?php echo $result['0']->id ?><br>
+      Name : <?php echo $result['0']->name ?><br>
+      Date of birth : <?php echo $result['0']->dob ?><br>
+      Gender : <?php echo $result['0']->gender ?><br>
+      Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
+      
+      <?php echo form_open(base_url('Hospital_Admin_Controller/add_tocken'), ['id' => 'acceptform','method' => 'POST' , 'name' => 'acceptform']) ?>    
+       <input type="hidden" name="donor_id" value='<?php echo $result['0']->id ?>'>
+       <input type="hidden" name="hospital_id" value='<?php echo $result['0']->hospital_id ?>'>
+        <?php //if($result[0]->tockenno == null){?>
+            ALREADY GOT TOCKEN
+         <?php } ?>
+        <label for="testdate">testdate</label>
+        <input type="text" name="testdate" id="testdate" required><br>
+        <label for="testtime">testtime</label>
+        <input type="text" name="testtime" id="testtime"required ><br>
+        <label for="tockenno">tockenno</label>
+        <input type="text" name="tockenno" id="tockenno"required><br>
+        <label for="verificationcode">verification code</label>
+        <input type="text" value="<?php echo (random_string('numeric',7)) ?>" name="verificationcode" id="verificationcode"required><br>
+      
+        <button name="submit" id="submit">Submit</a></button>
+      
+        <a href="<?php echo base_url('Hospital_Admin_Controller/') ?>">back</a>
+        <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
+        <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
+      </form>
+<?php  ?>
 
 </div>
-
 </body>
 </html>
