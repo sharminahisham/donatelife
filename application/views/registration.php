@@ -1,31 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8">
-	<title>application form</title>
-	<link rel="stylesheet" href="../../css/normalize.css">
-	<link rel="stylesheet" href="../../css/style.css">
+<title>Donate life</title> 
+<link href="<?php echo base_url('css/tooplate_style.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('css/bootstrap.css') ?>" rel="stylesheet" type="text/css" />
+
 </head>
-<body>
-	<div class="page-wrapper">
-		<div class="registration">
+<body> 
+
+<div id="tooplate_header_wrapper">
+
+    <div id="tooplate_header" style="background: url(<?php echo base_url('images/tooplate_header.png')?>);">
+    
+        <div id="site_title">
+        
+        	<h1><a href="#"><img src="<?php echo base_url('images/pic2.jpg') ?>" alt="business template" /><span>donate organs</span></a></h1>
+        
+        </div> <!-- end of site_title -->
+        
+        <div id="header_phone_no">
+
+			Toll Free: <span>08 324 552 409</span>
+        
+        </div>
+        
+        <div class="cleaner_h10"></div>
+        
+        <div id="tooplate_menu" style="background:url( <?php echo base_url('images/tooplate_menu.png');?>);">
+        	
+            <div id="home_menu"><a href="#"></a></div>
+            <!-- <div id="home_menu" style="background: url(<?php echo base_url('images/tooplate_home.png')?>);"><a href="#"></a></div> -->
+
+                
+            <ul>
+                <li><a href="<?php echo base_url('index') ?>" class="current">Home</a></li>
+                <!--<li><a href="<?php echo base_url('about') ?>">About Us</a></li>-->
+                <li><a href="<?php echo base_url('login') ?>">Admin</a></li>
+                <li><a href="<?php echo base_url('hospital-login') ?>">hospital-login</a></li>
+                <li><a href="<?php echo base_url('registration') ?>">registration</a></li>
+                <!-- <li><a href="contact.html">Contact</a></li> -->
+            </ul>    	
+        
+        </div> <!-- end of tooplate_menu -->
+        
+    </div>	  
+</div> <!-- end of header_wrapper -->
+
+	<div class="page-wrapper" style="background-color: #f7c6be;margin-left: 30%;margin-right: 30%">
+		<div class="row registration">
 			<?php echo form_open(base_url('Home_Controller/add_donor'),['id' => 'addform', 'name' => 'addform'])
 			?>
 				<?php echo validation_errors();?>
 				
-				<h2>REGISTRATION FORM</h2>
-				<div class="group width-100">
-					<label for="name">NAME</label>
-					<input type="text" name="name" id="name" value="<?php echo set_value('name');?>" required="">
+				<h2 class="text-center">REGISTRATION FORM</h2>
+				<div class="form-group">
+					<label for="name" class="col-sm-3">NAME</label>
+					<input class="col-sm-8" type="text" name="name" id="name" value="<?php echo set_value('name');?>" required="">
 					<div class="error">
 						<?php echo form_error('name'); ?>
                     </div>
 				</div>
-				<div class="group width-50">
-					<span>GENDER</span>
+            <br/>
+				<div class="form-group">
+					<span class="col-sm-2">GENDER</span>
 					<div class="gender-radio">
-						<label for="male">Male</label>
-						<input type="radio" id="male" name="gender" value="male" <?php echo set_radio('gender','male');?> >
+						<label for="male" class="col-sm-1   ">Male</label>
+						<input type="radio" class="col-sm-1" id="male" name="gender" value="male" <?php echo set_radio('gender','male');?> >
 					</div>
 					<div class="gender-radio">
 						<label for="female">Female</label>
@@ -35,7 +75,7 @@
 						<?php echo form_error('gender'); ?>
                     </div>
 				</div>
-				<div class="group width-50">
+				<div class="group width-100" style="margin-left: 10%">
 					<span>DATE OF BIRTH</span>
 					<select name="date" id="date" class="dob" >
 						<?php for ($i=1; $i<=31; $i++) {?>
@@ -56,9 +96,10 @@
 						<?php echo form_error('dob'); ?>
 					</div>
 				</div>
-				<div class="group width-100">
-					<label for="ADDRESS">ADDRESS</label>
-					<textarea name="address" id="ADDRESS" cols="10" rows="5" required="" ><?php echo set_value('address') ?></textarea>
+            <br/>
+				<div class="form-group" style="margin-left: 10%">
+					<label for="ADDRESS" class="col-sm-2">ADDRESS</label>
+					<textarea name="address" class="col-sm-6" id="ADDRESS" cols="10" rows="5" required="" ><?php echo set_value('address') ?></textarea>
 					<div  class="error">
 						<?php echo form_error('address'); ?>
 					</div>
