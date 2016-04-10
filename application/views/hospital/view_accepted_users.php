@@ -79,7 +79,7 @@ if(isset($result) && $result != FALSE)
         <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
         <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
       </form>
-<?php } ?>
+<?php  ?>
 
 </div>
 </body>
