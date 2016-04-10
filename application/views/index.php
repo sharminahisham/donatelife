@@ -34,8 +34,8 @@
             <ul>
                 <li><a href="<?php echo base_url('index') ?>" class="current">Home</a></li>
                 <li><a href="<?php echo base_url('about') ?>">About Us</a></li>
-                <!-- <li><a href="services.html">Services</a></li> -->
-                <!-- <li><a href="solutions.html">Solutions</a></li> -->
+                <li><a href="<?php echo base_url('login') ?>">Admin</a></li>
+                <li><a href="<?php echo base_url('hospital-login') ?>">hospital-login</a></li>
                 <!-- <li><a href="contact.html">Contact</a></li> -->
             </ul>    	
         
