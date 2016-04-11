@@ -287,11 +287,13 @@ class Hospital_Admin_Controller extends Check_Logged
 						'hospital_id'=>$hospital_id,
 						'report' => 'false'
 			        ];
-			$datas = [ 
+			$datas = [
 			        	'tockenno'=> $tockenno,
 			        		
 			         ];
 			         $where = ['id' => $donor_id];
+            var_dump($datas);
+            var_dump($where);
 				$this->Donor_Model->updation($where, $datas);
 
 			   if($this->Tocken_Details_Model->add($data))
