@@ -86,7 +86,6 @@ class Home_Controller extends CI_Controller
 				'hospital_id' => $hospital
 
 			];
-
 			   if($this->Donor_Model->add($data))
 			{
 				$data['message'] = '<script type = "text/javaScript">

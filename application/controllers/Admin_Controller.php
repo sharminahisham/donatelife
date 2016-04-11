@@ -209,10 +209,10 @@ class Admin_Controller extends Check_Logged
 		                'table_close'           => '</table>'
 		            ];
 		            $this->table->set_template($template);
-					$this->table->set_heading('hospitalname','hospitalcode','address');
+					$this->table->set_heading('hospitalname','hospitalcode','address', 'email', 'contact');
 					foreach ($data as $key => $value) 
 						{
-							$this->table->add_row($value->name, $value->code, $value->address);
+							$this->table->add_row($value->name, $value->code, $value->address, $value->email, $value->contact);
 						}
 
 					$data['result'] = $this->table->generate();
@@ -275,7 +275,7 @@ class Admin_Controller extends Check_Logged
 			}
 			else
 			{
-				$data[$error] = '<script type="text/javascript" >
+				$data['error'] = '<script type="text/javascript" >
                                           alert("Server Down ! Try Again");
                                           window.location="'.base_url("Admin_Controller/view").'"
 				                 </script>';
@@ -305,7 +305,7 @@ class Admin_Controller extends Check_Logged
 			}
 				else
 			    {
-				$data[$error] = '<script type="text/javascript" >
+				$data['error'] = '<script type="text/javascript" >
                                           alert("Server Down ! Try Again");
                                           window.location="'.base_url("Admin_Controller/view").'"
 				                 </script>';

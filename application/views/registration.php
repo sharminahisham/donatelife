@@ -35,78 +35,65 @@
             <ul>
                 <li><a href="<?php echo base_url('index') ?>" class="current">Home</a></li>
                 <!--<li><a href="<?php echo base_url('about') ?>">About Us</a></li>-->
+                <li><a href="<?php echo base_url('hospital') ?>">Hospital</a></li>
                 <li><a href="<?php echo base_url('login') ?>">Admin</a></li>
                 <li><a href="<?php echo base_url('hospital-login') ?>">hospital-login</a></li>
                 <li><a href="<?php echo base_url('registration') ?>">registration</a></li>
-                <!-- <li><a href="contact.html">Contact</a></li> -->
-            </ul>    	
+            </ul>
         
         </div> <!-- end of tooplate_menu -->
         
     </div>	  
 </div> <!-- end of header_wrapper -->
 
-	<div class="page-wrapper" style="background-color: #f7c6be;margin-left: 30%;margin-right: 30%">
-		<div class="row registration">
-			<?php echo form_open(base_url('Home_Controller/add_donor'),['id' => 'addform', 'name' => 'addform'])
-			?>
-				<?php echo validation_errors();?>
-				
+		<div>
+			<?php echo form_open(base_url('Home_Controller/add_donor'),['id' => 'addform', 'name' => 'addform']) ?>
+            <div class="form-reg">
 				<h2 class="text-center">REGISTRATION FORM</h2>
-				<div class="form-group">
-					<label for="name" class="col-sm-3">NAME</label>
-					<input class="col-sm-8" type="text" name="name" id="name" value="<?php echo set_value('name');?>" required="">
-					<div class="error">
-						<?php echo form_error('name'); ?>
+				<div class="col-md-6 form-group">
+                    <label for="name" >NAME</label>
+                    <input class="form-control" type="text" name="name" id="name" value="<?php echo set_value('name');?>" required="">
+                    <div class="error">
+                        <?php echo form_error('name'); ?>
                     </div>
 				</div>
-            <br/>
-				<div class="form-group">
-					<span class="col-sm-2">GENDER</span>
-					<div class="gender-radio">
-						<label for="male" class="col-sm-1   ">Male</label>
-						<input type="radio" class="col-sm-1" id="male" name="gender" value="male" <?php echo set_radio('gender','male');?> >
-					</div>
-					<div class="gender-radio">
-						<label for="female">Female</label>
-						<input type="radio" name="gender" id="female" value="female" <?php echo set_radio('gender','female');?> >
-					</div>
-					<div class="error">
-						<?php echo form_error('gender'); ?>
+                <div class="col-md-2 form-group">
+                    <div class="checkbox"><label for=""><input type="radio" name="gender" value="male"/> Male</label></div>
+                </div>
+                <div class="col-md-2 form-group">
+                    <div class="checkbox"><label for=""><input type="radio" name="gender" value="female"/> Female</label></div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label for="ADDRESS" >ADDRESS</label>
+                    <textarea name="address" class="form-control" id="ADDRESS" cols="10" rows="5" required="" ><?php echo set_value('address') ?></textarea>
+                    <div  class="error">
+                        <?php echo form_error('address'); ?>
                     </div>
-				</div>
-				<div class="group width-100" style="margin-left: 10%">
-					<span>DATE OF BIRTH</span>
-					<select name="date" id="date" class="dob" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label>DATE OF BIRTH</label>
+                    <select class="" name="date" id="date" class="dob" >
 						<?php for ($i=1; $i<=31; $i++) {?>
 						<option value="<?php echo $i ?>" <?php echo set_select('date',$i);?> ><?php echo $i ?></option>
 						<?php } ?>
 					</select>
-					<select name="month" id="month" class="dob">
+                    <select class="" name="month" id="month" class="dob">
 						<?php for ($i=1;$i<=12;$i++) {?>
 						<option value="<?php echo $i ?>"<?php echo $i,set_select('month',$i) ?>><?php echo $i ?></option>
 						<?php } ?>
 					</select>
-					<select name="year" id="year" class="dob">
+                    <select class="" name="year" id="year" class="dob">
 						<?php for ($i=1975;$i<=2016;$i++) {?>
 						<option value="<?php echo $i ?>"<?php echo $i,set_select('year',$i) ?>><?php echo $i ?></option>
 						<?php } ?>
 					</select>
-					<div class="error">
+                    <div class="error">
 						<?php echo form_error('dob'); ?>
-					</div>
-				</div>
-            <br/>
-				<div class="form-group" style="margin-left: 10%">
-					<label for="ADDRESS" class="col-sm-2">ADDRESS</label>
-					<textarea name="address" class="col-sm-6" id="ADDRESS" cols="10" rows="5" required="" ><?php echo set_value('address') ?></textarea>
-					<div  class="error">
-						<?php echo form_error('address'); ?>
-					</div>
-				</div>
-				<div class="group width-33">
+                    </div>
+                </div>
+				<div class="col-md-6 form-group">
 					<label for="">BLOOD GROUP</label>
-					<select name="bloodgroup" >
+					<select class="form-control" name="bloodgroup" >
 						<option value="" selected="" disabled="">select</option>
 						<option value="a+"<?php echo  set_select('bloodgroup', 'a+'); ?> >A+</option>
 						<option value="b+"<?php echo  set_select('bloodgroup', 'b+'); ?> >B+</option>
@@ -122,9 +109,9 @@
 						<?php echo form_error('bloodgroup'); ?>
 					</div>
 				</div>
-				<div class="group width-33">
+				<div class="col-md-6 form-group">
 					<label for="hospital">HOSPITALS</label>
-					<select name="hospital" id="hospital" required="">
+					<select class="form-control" name="hospital" id="hospital" required="">
 					<option value="" selected="" disabled="">select</option>
 					<?php 
 						if (isset($result) and $result != FALSE) {
@@ -139,23 +126,23 @@
 						<?php echo form_error('hospital'); ?>
 					</div>
 				</div>
-				<div class="group width-100">
+				<div class="col-md-6 form-group">
 					<label for="mobile">NUMBER</label>
-					<input type="tell" name="mobile" id="mobile" value="<?php echo set_value('mobile'); ?>" required="">
+					<input class="form-control" type="tell" name="mobile" id="mobile" value="<?php echo set_value('mobile'); ?>" required="">
 					<div  class="error">
 						<?php echo form_error('mobile'); ?>
 					</div>
 				</div>
-				<div class="group width-100">
+				<div class="col-md-6 form-group">
 					<label for="email">Email</label>
-					<input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>">
+					<input class="form-control" type="email" name="email" id="email" value="<?php echo set_value('email'); ?>">
 					<div  class="error">
 						<?php echo form_error('email'); ?>
 					</div>
 				</div>
-				<div class="group width-100">
-					<input type="submit" name="usubmit" id="submit" value="SUBMIT">
-					<input type="submit" name="ucancel" id="cancel" value="CANCEL">
+				<div class="col-md-12 form-group">
+					<input class="btn btn-default" type="submit" name="usubmit" id="submit" value="SUBMIT">
+					<input class="btn btn-danger" type="submit" name="ucancel" id="cancel" value="CANCEL">
 				</div>
 			</form>
 		</div>

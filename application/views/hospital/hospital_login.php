@@ -10,6 +10,7 @@
 <div class="login">
 		<div class="login-screen">
 			<div class="app-title">
+                <a href="<?php echo base_url('index')?>" class="btn-home">home</a>
 				<h1>Hospital Login</h1>
 			</div>
 

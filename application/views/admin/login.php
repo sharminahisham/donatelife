@@ -4,12 +4,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>admin login</title>
-	<link rel="stylesheet" href="<?php echo base_url('css/loginstyle.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('css/loginstyle.css'); ?>">
 </head>
 <body>
 	<div class="login">
 		<div class="login-screen">
 			<div class="app-title">
+                <a href="<?php echo base_url('index')?>" class="btn-home">home</a>
 				<h1>Admin Login</h1>
 			</div>
 

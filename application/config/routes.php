@@ -51,6 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 /*Public routes*/
 $route['index'] = 'Home_Controller/index';
+$route['hospital'] = 'Home_Controller/add_hospital';
+
 
 
 /*Admin routes*/
@@ -76,6 +78,7 @@ $route['accepting'] = 'Admin_Controller/view_donor';
 $route['dashboard/hospitals'] = 'Admin_Controller/view_hospitals';
 $route['hregister'] = 'Hospital_Controller/hospital_registration';
 $route['accepteduser'] = 'Hospital_Admin_Controller/accept';
+
 $route['selecteduser'] = 'Hospital_Admin_Controller/view_donor';
 $route['report'] = 'Lab_Controller/add_report';
 $route['reportview'] = 'Lab_Controller/view';

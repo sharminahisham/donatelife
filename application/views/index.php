@@ -34,11 +34,11 @@
             <ul>
                 <li><a href="<?php echo base_url('index') ?>" class="current">Home</a></li>
                 <!--<li><a href="<?php echo base_url('about') ?>">About Us</a></li>-->
+                <li><a href="<?php echo base_url('hospital') ?>">Hospital</a></li>
                 <li><a href="<?php echo base_url('login') ?>">Admin</a></li>
                 <li><a href="<?php echo base_url('hospital-login') ?>">hospital-login</a></li>
                 <li><a href="<?php echo base_url('registration') ?>">registration</a></li>
-                <!-- <li><a href="contact.html">Contact</a></li> -->
-            </ul>    	
+            </ul>
         
         </div> <!-- end of tooplate_menu -->
         
