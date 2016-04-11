@@ -157,6 +157,11 @@ function hospital_menu($current)
             'title' => 'lab',
             'icon' => 'fa-folder',
             'link' => 'lab'
+        ],
+        'report' => [
+            'title' => 'report',
+            'icon' => 'fa-folder',
+            'link' => 'report'
         ]
     ];
 

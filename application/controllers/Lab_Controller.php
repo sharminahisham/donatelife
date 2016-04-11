@@ -25,7 +25,6 @@ class Lab_Controller extends CI_Controller
 
 	public function make_lab_report($id)
 	{ 
-        
 		$result = $this->Tocken_Details_Model->view_join(['donor.id' => $id]);
 		if ($result != FALSE) 
 		{
@@ -58,33 +57,34 @@ class Lab_Controller extends CI_Controller
                 $hospital_id=$this->input->post('hospital_id');
 	            
 				$data = [
-
-					
 					'verifiedby' => $verifiedby,
 					'medicalreport' =>$medicalreport,
 					'donor_id'=>$donor_id,
 					'hospital_id'=>$hospital_id,
-						
-				   
 			    ];
 
 			    if($this->Lab_Model->insert($data))
 
-		    	{	
-		    	    $data['message'] = '<script type="text/javascript">
+		    	{
+                    $data = [
+                        'report' => 'true'
+                    ];
+                    if ($this->Donor_Model->update(['id' => $donor_id], $data)) {
+                        $data['message'] = '<script type="text/javascript">
 		    	                     alert(" Successfully Forwaded");
-		    	                     window.location = "'.base_url('Lab_Controller/view').'";
+		    	                     window.location = "'.base_url('hospital_dashboard/lab').'";
 		    	                     </script>';
-		    	    $this->load->view('admin/labreport',$data);
+                        $this->load->view('hospital/make_lab_report',$data);
+                    }
 
 		    	}
 				else
 				{
                     $data['message'] = '<script type="text/javascript">
                                     alert("Forwading failed");
-                                    window.location = "'.base_url('Lab_Controller/add_report').'"
+                                    window.location = "'.base_url('/hospital_dashboard/lab').'"
                                    </script>';
-                     $this->load->view('admin/labreport',$data);              
+                     $this->load->view('hospital/make_lab_report',$data);
 				}
             }
 	    }

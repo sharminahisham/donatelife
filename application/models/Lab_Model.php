@@ -5,6 +5,19 @@
 class Lab_Model extends CI_Model
 {
 	protected $table = 'report';
+
+    protected $fields = [
+        'donor.name',
+        'donor.gender',
+        'donor.mobile',
+        'donor.email',
+        'donor.report',
+        'report.forwadedby',
+        'report.forwadedto',
+        'report.medicalreport',
+        'report.verifiedby',
+    ];
+
 	function __construct()
 	{
 		parent::__construct();
@@ -68,6 +81,23 @@ class Lab_Model extends CI_Model
 			}
 		}
 	}
+
+
+    public function view_join()
+    {
+        $this->db->select($this->fields);
+        $this->db->join('donor', 'donor.id = report.donor_id');
+        $query  =$this->db->get($this->table);
+        if ($query != false) {
+            if ($query->num_rows() > 0) {
+                return $query->result();
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
 
 

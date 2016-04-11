@@ -13,6 +13,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		$this->load->library(['form_validation','table']);
 		$this->load->model('Donor_Model');
 		$this->load->model('User_Model');
+		$this->load->model('Lab_Model');
 		$this->load->model('Tocken_Details_Model');
 	}
 
@@ -292,8 +293,6 @@ class Hospital_Admin_Controller extends Check_Logged
 			        		
 			         ];
 			         $where = ['id' => $donor_id];
-            var_dump($datas);
-            var_dump($where);
 				$this->Donor_Model->updation($where, $datas);
 
 			   if($this->Tocken_Details_Model->add($data))
@@ -326,10 +325,50 @@ class Hospital_Admin_Controller extends Check_Logged
                      //echo ('$result[0]');
 				//}
 				
-
-
 		}
-	
+
+
+    public function view_report()
+    {
+        $data = $this->Lab_Model->view_join();
+        if ($data != false) {
+            $template = [
+                'table_open'            => '<table id="team" class = "table">',
+                'thead_open'            => '<thead class="header">',
+                'thead_close'           => '</thead>',
+
+                'heading_row_start'     => '<tr>',
+                'heading_row_end'       => '</tr>',
+                'heading_cell_start'    => '<th>',
+                'heading_cell_end'      => '</th>',
+
+                'tbody_open'            => '<tbody>',
+                'tbody_close'           => '</tbody>',
+
+                'row_start'             => '<tr>',
+                'row_end'               => '</tr>',
+                'cell_start'            => '<td>',
+                'cell_end'              => '</td>',
+
+                'row_alt_start'         => '<tr>',
+                'row_alt_end'           => '</tr>',
+                'cell_alt_start'        => '<td>',
+                'cell_alt_end'          => '</td>',
+
+                'table_close'           => '</table>'
+            ];
+            $this->table->set_template($template);
+            $this->table->set_heading('Name','Gender','mobile','email','forwarded by', 'medical report', 'verified by');
+            foreach ($data as $key => $value)
+            {
+                $this->table->add_row($value->name, $value->gender, $value->mobile,$value->email, $value->forwadedto, $value->medicalreport, $value->verifiedby);
+            }
+
+            $data['report'] = $this->table->generate();
+        } else {
+            $data['message'] = 'no report found';
+        }
+        $this->load->view('hospital/view_report', $data);
+    }
 		
 }
-?>
