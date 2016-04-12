@@ -58,6 +58,7 @@
                     </div>
 				</div>
                 <div class="col-md-2 form-group">
+                <label for="gender" >GENDER</label>
                     <div class="checkbox"><label for=""><input type="radio" name="gender" value="male"/> Male</label></div>
                 </div>
                 <div class="col-md-2 form-group">

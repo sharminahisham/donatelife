@@ -128,7 +128,7 @@ class Admin_Controller extends Check_Logged
 						$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode,'<a href='.base_url('Admin_Controller/view_donor/'.$value->id).'>accept</a>','<a href="'.base_url('Admin_Controller/reject/'.$value->id).'">reject</a>');
 					}
 					else
-						$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, $value->statuscode);
+						//$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, $value->statuscode);
 						$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, ($value->statuscode == 'FALSE' ) ? '<font color="red" >Rejected </font>' : 'accepted');
 
 				}

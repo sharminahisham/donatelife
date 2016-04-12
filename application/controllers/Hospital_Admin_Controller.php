@@ -358,10 +358,10 @@ class Hospital_Admin_Controller extends Check_Logged
                 'table_close'           => '</table>'
             ];
             $this->table->set_template($template);
-            $this->table->set_heading('Name','Gender','mobile','email','forwarded by', 'medical report', 'verified by');
+            $this->table->set_heading('Name','Gender','mobile','email', 'medical report', 'verified by');
             foreach ($data as $key => $value)
             {
-                $this->table->add_row($value->name, $value->gender, $value->mobile,$value->email, $value->forwadedto, $value->medicalreport, $value->verifiedby);
+                $this->table->add_row($value->name, $value->gender, $value->mobile,$value->email, $value->medicalreport, $value->verifiedby);
             }
 
             $data['report'] = $this->table->generate();
