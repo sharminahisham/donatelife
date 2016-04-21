@@ -1,11 +1,11 @@
-<?php 
+<?php
 /**
-* 
+*
 */
 require_once(APPPATH.'controllers/Check_Logged.php');
 class Hospital_Admin_Controller extends Check_Logged
 {
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -40,7 +40,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		}
 	}
 
-	
+
 	public function login()
 	{
 
@@ -87,16 +87,16 @@ class Hospital_Admin_Controller extends Check_Logged
 	}
 
     /* accepted users*/
-	public function index()		
-	{ 
+	public function index()
+	{
 		if($this->logged == true and $_SESSION['type'] == 'hospital'){
 		$data=$this->Donor_Model->view(['statuscode' => '1']);
 
 		if($data != null)
 			{
 				$template = [
-		                'table_open'            => '<table id="team" class = "table">',
-		                'thead_open'            => '<thead class="header">',
+		                'table_open'            => '<table id="team" width="100%">',
+		                'thead_open'            => '<thead>',
 		                'thead_close'           => '</thead>',
 
 		                'heading_row_start'     => '<tr>',
@@ -121,9 +121,9 @@ class Hospital_Admin_Controller extends Check_Logged
 		            ];
 		            $this->table->set_template($template);
 				$this->table->set_heading('Id','Name','Gender','Date of Birth','Address','Blood Group','status code');
-				foreach ($data as $key => $value) 
+				foreach ($data as $key => $value)
 					{
-						$this->table->add_row($value->id, anchor(base_url('Hospital_Admin_Controller/view_donor/'.$value->id),$value->name), $value->gender,$value->dob,$value->address,$value->bloodgroup,$value->statuscode);
+						$this->table->add_row($value->id, anchor(base_url('hospital_dashboard/donor/'.$value->id),$value->name), $value->gender,$value->dob,$value->address,$value->bloodgroup,$value->statuscode);
 					}
 
 				$data['result'] = $this->table->generate();
@@ -138,7 +138,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		else
 	    {
 			redirect(base_url('login'));
-			
+
 		}
 	}
 
@@ -159,24 +159,24 @@ class Hospital_Admin_Controller extends Check_Logged
 	public function view_donor($id)
 	{
 		$result = $this->Donor_Model->view(['id' => $id]);
-		
+
 
 			if ($result != FALSE) {
 				$data['result'] = $result;
 				$this->load->view('hospital/view_accepted_users',$data);
 
 			}
-		
+
 
 	}
 
 	/* tocken details*/
-		
+
 	public function view_lab_request()
 	{
 		if($this->logged == true){
 		$data=$this->Tocken_Details_Model->view_all();
-			
+
 		if($data != null)
 		{
 			$template = [
@@ -204,10 +204,10 @@ class Hospital_Admin_Controller extends Check_Logged
 
 	                'table_close'           => '</table>'
 	        ];
-	        $this->table->set_template($template);	
+	        $this->table->set_template($template);
 	  //       $where = ['report' => 'generated'];
 			// $data = $this->Tocken_Details_Model->view_join($where);
-			// if ($data != false) 
+			// if ($data != false)
 			// 	{
 	                 //var_dump($data);
 					$this->table->set_heading('Id' , 'Name' , 'Hospital_id' , 'Testdate' , 'Testtime' , 'Tokenno' , 'Verificationcode');
@@ -236,10 +236,10 @@ class Hospital_Admin_Controller extends Check_Logged
 	}
 
 	public function view_accepted_users($id)
-	{ 
+	{
 
 		$result = $this->Tocken_Details_Model->view(['id' => $id]);
-		if ($result != FALSE) 
+		if ($result != FALSE)
 		{
 			$data['result'] = $result;
 			$this->load->view('hospital/view_lab_request',$data);
@@ -249,22 +249,22 @@ class Hospital_Admin_Controller extends Check_Logged
 
 
 
-	   
+
 		public function add_report()
 		{
 			$this->load->view('hospital/make_lab_report');
-		}	
+		}
 
 
 		public function add_tocken()
 		{
 			//validation
-                  
+
 	     $this->form_validation->set_rules('testdate', 'testdate', 'required');
 		 $this->form_validation->set_rules('testtime', 'testtime', 'required');
 		 $this->form_validation->set_rules('tockenno', 'tockenno', 'required');
 		 $this->form_validation->set_rules('verificationcode', 'verificationcode', 'required');
-         
+
         if($this->form_validation->run() === FALSE)
 			{
 				$data['result'] = $this->Tocken_Details_Model->view_all();
@@ -275,7 +275,7 @@ class Hospital_Admin_Controller extends Check_Logged
 			$testdate = $this->input->post('testdate');
 			$testtime = $this->input->post('testtime');
 			$tockenno= $this->input->post('tockenno');
-			$verificationcode = $this->input->post('verificationcode');	
+			$verificationcode = $this->input->post('verificationcode');
             $donor_id=$this->input->post('donor_id');
             $hospital_id=$this->input->post('hospital_id');
 
@@ -290,7 +290,7 @@ class Hospital_Admin_Controller extends Check_Logged
 			        ];
 			$datas = [
 			        	'tockenno'=> $tockenno,
-			        		
+
 			         ];
 			         $where = ['id' => $donor_id];
 				$this->Donor_Model->updation($where, $datas);
@@ -303,7 +303,7 @@ class Hospital_Admin_Controller extends Check_Logged
 									</script>';
 				$this->load->view('admin/view_tocken',$data);
 			}
-			
+
 			else
 			{
 				$data['error'] = '<script type = "text/javaScript">
@@ -320,11 +320,11 @@ class Hospital_Admin_Controller extends Check_Logged
 
 
 	   		      //$where = ['id' => $id];
-				//if($this->Tocken_Details_Model->update($where , $data) )	
+				//if($this->Tocken_Details_Model->update($where , $data) )
 				//{
                      //echo ('$result[0]');
 				//}
-				
+
 		}
 
 
@@ -370,5 +370,5 @@ class Hospital_Admin_Controller extends Check_Logged
         }
         $this->load->view('hospital/view_report', $data);
     }
-		
+
 }

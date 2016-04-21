@@ -99,7 +99,7 @@ $route['hospital_dashboard/logout'] = 'Hospital_Admin_Controller/logout';
 
 /*donor*/
 $route['hospital_dashboard/donors'] = 'Hospital_Admin_Controller/index';
-$route['hospital_dashboard/donors/(:num)'] = 'Hospital_Admin_Controller/view_donor/$1';
+$route['hospital_dashboard/donor/(:num)'] = 'Hospital_Admin_Controller/view_donor/$1';
 
 /*lab*/
 $route['hospital_dashboard/lab'] = 'Hospital_Admin_Controller/view_lab_request';

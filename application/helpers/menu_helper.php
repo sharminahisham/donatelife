@@ -179,27 +179,17 @@ function hospital_menu($current)
     ];
 
     $html = '';
-    $html .='<nav class="sidebar-left">
-        <div class="">
-          <ul class="menu-left">
-            <li>
-              <div class="user-img">
-                <img class="img-responsive img-circle center-block" src="'.base_url().'" alt="User">
-              </div>
-              <div class="user-id text-center">
-                <span class="">Hospital admin</span>
-              </div>
-            </li>';
+    $html .= '<nav class="col-md-3">
+					<ul>';
     foreach ($menu as $key => $value) {
         if ($current == $key) {
-            $html .='<li><a href="'.base_url('hospital_dashboard/'.$value['link']).'" class="active">'.ucfirst($key).' &nbsp;<i class="menu-icon fa '.$value['icon'].' pull-right"></i></a></li>';
+            $html .= '<li class="active"><a href="'.base_url('hospital_dashboard/'.$value['link']).'"><i class="glyphicon glyphicon-dashboard"></i>'.ucfirst($key).'</a></li>';
         } else {
-            $html .='<li><a href="'.base_url('hospital_dashboard/'.$value['link']).'" class="">'.ucfirst($key).' &nbsp;<i class="menu-icon fa '.$value['icon'].' pull-right"></i></a></li>';
+            $html .= '<li class=""><a href="'.base_url('hospital_dashboard/'.$value['link']).'"><i class="glyphicon glyphicon-dashboard"></i>'.ucfirst($key).'</a> </li>';
         }
     }
     $html .= '</ul>
-        </div>
-      </nav>';
+				</nav>';
     return $html;   
 }
 
