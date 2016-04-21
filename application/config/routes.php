@@ -67,6 +67,11 @@ $route['registration'] = 'Home_Controller/registration';
 
 $route['dashboard/donors/(:num)'] = 'Admin_Controller/view_donor_details/$1';
 $route['dashboard/donors/view_donor_details'] = 'Admin_Controller/view_donor_details';
+$route['dashboard/donors/accept/(:num)'] = 'Admin_Controller/view_donor/$1';
+$route['dashboard/donors/accept/submit'] = 'Admin_Controller/accept';
+$route['dashboard/donors/reject/(:num)'] = 'Admin_Controller/reject/$1';
+
+
 /*dashboard*/
 
 $route['dashboard'] = 'Admin_Controller/dashboard';

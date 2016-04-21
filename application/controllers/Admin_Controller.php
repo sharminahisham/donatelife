@@ -27,6 +27,11 @@ class Admin_Controller extends Check_Logged
 		var_dump(hash('sha512', 'admin'));
 	}
 
+    public function old_dash()
+    {
+        $this->load->view('admin/dashboard_old');
+    }
+
 	public function verify()
 	{
 		$this->form_validation->set_rules('username', 'username','required');
@@ -73,7 +78,7 @@ class Admin_Controller extends Check_Logged
 
 	public function login()
 	{
-		if($this->logged == true and $_SESSION['type'] == 'admin')
+		if($this->logged == true and isset($_SESSION['type']) and $_SESSION['type'] == 'admin')
 		{
 			redirect(base_url('dashboard/view'));
 		}
@@ -125,7 +130,7 @@ class Admin_Controller extends Check_Logged
 				$this->table->set_heading('id', 'name', 'blood group', 'states code');
 				foreach ($data as $key => $value) {
 					if($value->statuscode == '0'){
-						$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode,'<a href='.base_url('Admin_Controller/view_donor/'.$value->id).'>accept</a>','<a href="'.base_url('Admin_Controller/reject/'.$value->id).'">reject</a>');
+						$this->table->add_row($value->id, $value->name, $value->bloodgroup, $value->statuscode,'<a href='.base_url('dashboard/donors/accept/'.$value->id).'>accept</a>','<a href="'.base_url('dashboard/donors/reject/'.$value->id).'">reject</a>');
 					}
 					else
 						//$this->table->add_row($value->id, anchor(base_url('dashboard/donors/'.$value->id),$value->name), $value->bloodgroup, $value->statuscode);
@@ -184,7 +189,7 @@ class Admin_Controller extends Check_Logged
 			if($data != null)
 				{
 					$template = [
-		                'table_open'            => '<table id="team" class = "table">',
+		                'table_open'            => '<table width="100%">',
 		                'thead_open'            => '<thead class="header">',
 		                'thead_close'           => '</thead>',
 
@@ -260,7 +265,7 @@ class Admin_Controller extends Check_Logged
 				{
 					$data['message'] = '<script type="text/Javascript">
 											alert("success");
-											window.location = "'.base_url("Admin_Controller/view").'";
+											window.location = "'.base_url("dashboard/donors").'";
 										</script>';
 					$this->load->view('admin/view_registered_users',$data);
 				}	
@@ -268,7 +273,7 @@ class Admin_Controller extends Check_Logged
 				{
 					$data['message'] = '<scrip type="text/Javascript">
 					                         alert("Registration Failed ! Try again later");
-                                             window.location ="'.base_url("Admin_Controller/view").'"
+                                             window.location ="'.base_url("dashboard/donors").'"
 					                    </script>';
 					$this->load->view('admin/view_registered_users',$data);
 				}
