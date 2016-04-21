@@ -148,7 +148,6 @@
                                                           <td>Blood Group</td><td><span ><?php echo $result['0']->gender ?></span></td>
                                                       </tr>
                                                   </table>
-                                                  <span class="panel-body msg"> ALREADY GOT TOCKEN</span>
                                                   <a href="<?php echo base_url('hospital_dashboard/donors') ?>">back</a>
                                               </div> <!-- end of panel body -->
                                           </div> <!-- end of panel -->
@@ -166,11 +165,11 @@
                                 <div>
                                       <?php echo form_open(base_url('Hospital_Admin_Controller/add_tocken'), ['id' => 'acceptform','method' => 'POST' , 'name' => 'acceptform']) ?>
 
-                                            <input type="hidden" name="donor_id" value='<?php /*echo $result['0']->id */?>'>
-                                            <input type="hidden" name="hospital_id" value='<?php /*echo $result['0']->hospital_id */?>'>
-                                            <div class="form-group">
+                                            <input type="hidden" name="donor_id" value='<?php echo $result['0']->id ?>'>
+                                            <input type="hidden" name="hospital_id" value='<?php echo $result['0']->hospital_id ?>'>
+                                            <div class="form-group ">
                                                 <label for="testdate">testdate</label>
-                                                <input type="text" name="testdate" id="testdate" required><br>
+                                                <input class="" type="text" name="testdate" id="testdate" required><br>
                                             </div>
                                             <div class="form-group">
                                                 <label for="testtime">testtime</label>
@@ -186,9 +185,9 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <button name="submit" id="submit">Submit</a></button>
+                                                <button class="btn btn-default" name="submit" id="submit">Submit</a></button>
+                                                <button class="btn btn-danger" name="reset" id="reset">Reset</a></button>
                                             </div>
-                                            <a href="<?php /*echo base_url('Hospital_Admin_Controller/') */?>">back</a>
                                             <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
                                             <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
                                         </form>

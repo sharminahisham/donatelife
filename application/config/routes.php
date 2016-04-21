@@ -105,6 +105,8 @@ $route['hospital_dashboard/donor/(:num)'] = 'Hospital_Admin_Controller/view_dono
 $route['hospital_dashboard/lab'] = 'Hospital_Admin_Controller/view_lab_request';
 
 /*report*/
+
+$route['hospital_dashboard/lab/make_report/(:num)'] = 'Lab_Controller/make_lab_report/$1';
 $route['hospital_dashboard/report'] = 'Hospital_Admin_Controller/view_report';
 
 

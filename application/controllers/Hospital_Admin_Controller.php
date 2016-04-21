@@ -180,8 +180,8 @@ class Hospital_Admin_Controller extends Check_Logged
 		if($data != null)
 		{
 			$template = [
-	                'table_open'            => '<table id="team" class = "table">',
-	                'thead_open'            => '<thead class="header">',
+	                'table_open'            => '<table id="team" width= 100% >',
+	                'thead_open'            => '<thead >',
 	                'thead_close'           => '</thead>',
 
 	                'heading_row_start'     => '<tr>',
@@ -214,7 +214,7 @@ class Hospital_Admin_Controller extends Check_Logged
 					foreach ($data as $key => $value)
 
 					{
-						$this->table->add_row($value->donor_id, anchor(base_url('Lab_Controller/make_lab_report/'.$value->donor_id),$value->name), $value->hospital_id, $value->testdate, $value->testtime,$value->tockenno ,$value->verificationcode);
+						$this->table->add_row($value->donor_id, anchor(base_url('hospital_dashboard/lab/make_report/'.$value->donor_id),$value->name), $value->hospital_id, $value->testdate, $value->testtime,$value->tockenno ,$value->verificationcode);
 					}
 
 					$data['result'] = $this->table->generate();
@@ -333,8 +333,8 @@ class Hospital_Admin_Controller extends Check_Logged
         $data = $this->Lab_Model->view_join();
         if ($data != false) {
             $template = [
-                'table_open'            => '<table id="team" class = "table">',
-                'thead_open'            => '<thead class="header">',
+                'table_open'            => '<table id="team" width=100% >',
+                'thead_open'            => '<thead >',
                 'thead_close'           => '</thead>',
 
                 'heading_row_start'     => '<tr>',
