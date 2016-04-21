@@ -71,50 +71,174 @@
         <!-- content -->
         <div>
             <div class="panel panel-default">
-                <div class="panel-heading">Employees information</div>
+                <div class="panel-heading">Donor information</div>
                 <div class="panel-body">
 
                     <!-- table grid view -->
                     <div class="grid">
-<?php
-if(isset($result) && $result != FALSE)
-{
-  if($result[0]->tockenno != null) { ?>
-      Id : <?php echo $result['0']->id ?><br>
-      Name : <?php echo $result['0']->name ?><br>
-      Date of birth : <?php echo $result['0']->dob ?><br>
-      Gender : <?php echo $result['0']->gender ?><br>
-      Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
-      <?php echo "ALREADY GOT TOCKEN";?> <br>
-      <a href="<?php echo base_url('Hospital_Admin_Controller/') ?>">back</a>
-<?php } else {?>
-      Id : <?php echo $result['0']->id ?><br>
-      Name : <?php echo $result['0']->name ?><br>
-      Date of birth : <?php echo $result['0']->dob ?><br>
-      Gender : <?php echo $result['0']->gender ?><br>
-      Bloodgroup : <?php echo $result['0']->bloodgroup ?><br>
+                        <?php
+                        if(isset($result) && $result != FALSE)
+                        {
+                          if($result[0]->tockenno != null) { ?>
+                              <div>
+
+                                  <!-- Sales stats & usage stats -->
+                                  <div class="col-md-4">
+                                      <!-- usage stats -->
+                                      <div class="row">
+                                          <div class="panel panel-default ">
+                                              <div class="panel-heading">Donor status</div>
+                                              <div class="panel-body" style="height:230px;">
+                                                  <table class="stats">
+                                                      <tr>
+                                                          <td>id</td><td><span ><?php echo $result['0']->id ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>name</td><td><span ><?php echo $result['0']->name ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>Date Of Birth</td><td><span ><?php echo $result['0']->dob ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>Gender</td><td><span ><?php echo $result['0']->gender ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>Blood Group</td><td><span ><?php echo $result['0']->gender ?></span></td>
+                                                      </tr>
+                                                  </table>
+                                                  <span class="panel-body msg"> ALREADY GOT TOCKEN</span>
+                                                  <a href="<?php echo base_url('hospital_dashboard/donors') ?>">back</a>
+                                              </div> <!-- end of panel body -->
+                                          </div> <!-- end of panel -->
+                                      </div> <!-- end of column -->
+                                  </div> <!-- end of row -->
+                              </div>
+                        <?php } else {?>
+                              <div>
+
+                                  <!-- Sales stats & usage stats -->
+                                  <div class="col-md-4">
+                                      <!-- usage stats -->
+                                      <div class="row">
+                                          <div class="panel panel-default ">
+                                              <div class="panel-heading">Donor status</div>
+                                              <div class="panel-body" style="height:230px;">
+                                                  <table class="stats">
+                                                      <tr>
+                                                          <td>id</td><td><span ><?php echo $result['0']->id ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>name</td><td><span ><?php echo $result['0']->name ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>Date Of Birth</td><td><span ><?php echo $result['0']->dob ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>Gender</td><td><span ><?php echo $result['0']->gender ?></span></td>
+                                                      </tr>
+
+                                                      <tr>
+                                                          <td>Blood Group</td><td><span ><?php echo $result['0']->gender ?></span></td>
+                                                      </tr>
+                                                  </table>
+                                                  <span class="panel-body msg"> ALREADY GOT TOCKEN</span>
+                                                  <a href="<?php echo base_url('hospital_dashboard/donors') ?>">back</a>
+                                              </div> <!-- end of panel body -->
+                                          </div> <!-- end of panel -->
+                                      </div> <!-- end of column -->
+                                  </div> <!-- end of row -->
+                              </div>
+<!---->
+<!--                              Id : --><?php //echo $result['0']->id ?><!--<br>-->
+<!--                              Name : --><?php //echo $result['0']->name ?><!--<br>-->
+<!--                              Date of birth : --><?php //echo $result['0']->dob ?><!--<br>-->
+<!--                              Gender : --><?php //echo $result['0']->gender ?><!--<br>-->
+<!--                              Bloodgroup : --><?php //echo $result['0']->bloodgroup ?><!--<br>-->
 
 
-      <?php echo form_open(base_url('Hospital_Admin_Controller/add_tocken'), ['id' => 'acceptform','method' => 'POST' , 'name' => 'acceptform']) ?>
-            <input type="hidden" name="donor_id" value='<?php /*echo $result['0']->id */?>'>
-            <input type="hidden" name="hospital_id" value='<?php /*echo $result['0']->hospital_id */?>'>
-            <label for="testdate">testdate</label>
-            <input type="text" name="testdate" id="testdate" required><br>
-            <label for="testtime">testtime</label>
-            <input type="text" name="testtime" id="testtime"required ><br>
-            <label for="tockenno">tockenno</label>
-            <input type="text" name="tockenno" id="tockenno"required><br>
-            <label for="verificationcode">verification code</label>
-            <input type="text" value="<?php echo (random_string('numeric',7)) ?>" name="verificationcode" id="verificationcode"required><br>
+                                <div>
+                                      <?php echo form_open(base_url('Hospital_Admin_Controller/add_tocken'), ['id' => 'acceptform','method' => 'POST' , 'name' => 'acceptform']) ?>
 
-            <button name="submit" id="submit">Submit</a></button>
+                                            <input type="hidden" name="donor_id" value='<?php /*echo $result['0']->id */?>'>
+                                            <input type="hidden" name="hospital_id" value='<?php /*echo $result['0']->hospital_id */?>'>
+                                            <div class="form-group">
+                                                <label for="testdate">testdate</label>
+                                                <input type="text" name="testdate" id="testdate" required><br>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="testtime">testtime</label>
+                                                <input type="text" name="testtime" id="testtime"required ><br>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tockenno">tockenno</label>
+                                                <input type="text" name="tockenno" id="tockenno"required><br>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="verificationcode">verification code</label>
+                                                <input type="text" value="<?php echo (random_string('numeric',7)) ?>" name="verificationcode" id="verificationcode"required><br>
+                                            </div>
 
-            <a href="<?php /*echo base_url('Hospital_Admin_Controller/') */?>">back</a>
-            <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
-            <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
-        </form>
-  <?php }
-}?>
+                                            <div class="form-group">
+                                                <button name="submit" id="submit">Submit</a></button>
+                                            </div>
+                                            <a href="<?php /*echo base_url('Hospital_Admin_Controller/') */?>">back</a>
+                                            <input type="hidden" name="donor_id" id="donor_id" value="<?php echo $result[0]->id ?>">
+                                            <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo $result[0]->hospital_id ?>">
+                                        </form>
+                                  <?php }
+                                }?>
+                                </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    Designed  <a href="">Me</a>
+</footer>
+
+
+
+<script>
+
+
+
+    Morris.Area({
+        element: 'area-example',
+        data: [
+            { y: '2006', a: 25, b: 10 },
+            { y: '2007', a: 50,  b: 40 },
+            { y: '2008', a: 55,  b: 40 },
+            { y: '2009', a: 75,  b: 65 },
+            { y: '2010', a: 50,  b: 40 },
+            { y: '2011', a: 75,  b: 65 },
+            { y: '2012', a: 100, b: 90 }
+        ],
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['Series A', 'Series B'],
+        resize: true
+
+    });
+
+</script>
+
+</body>
+
+</html>
+
 
 
 <!--

@@ -305,6 +305,8 @@ table.stats tr span {
     border-color:transparent;
 
 }
-
+ .panel-body.msg{
+     color: #ff0000;
+ }
 
 

@@ -202,7 +202,7 @@
         <!-- content -->
         <div>
             <div class="panel panel-default">
-                <div class="panel-heading">Employees information</div>
+                <div class="panel-heading">Donors information</div>
                 <div class="panel-body">
 
                     <!-- table grid view -->
