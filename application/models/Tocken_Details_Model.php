@@ -19,7 +19,8 @@ class Tocken_Details_Model extends CI_Model
 		'donor.name',
 		'donor.gender',
 		'donor.bloodgroup',
-		'donor.dob'
+		'donor.dob',
+		'donor.report',
 	];
 
 	function __construct()
@@ -28,9 +29,10 @@ class Tocken_Details_Model extends CI_Model
 		$this->load->database();
 	}
 
-	public function view_all()
+	public function view_all($where)
 	{
 		$this->db->select($this->fields);
+        $this->db->where($where);
 		$this->db->from($this->table);
 		$this->db->join('donor','donor.id = tocken_details.donor_id');
 		//$this->db->join('donor','donor.tockenno = tocken_details.tockenno');

@@ -83,9 +83,10 @@ class Lab_Model extends CI_Model
 	}
 
 
-    public function view_join()
+    public function view_join($where)
     {
         $this->db->select($this->fields);
+        $this->db->where($where);
         $this->db->join('donor', 'donor.id = report.donor_id');
         $query  =$this->db->get($this->table);
         if ($query != false) {

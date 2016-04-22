@@ -27,7 +27,8 @@ class Hospital_Model extends CI_Model
 		public function view(array $where)
 			{
 				$this->db->where($where);
-				$query->db->get($this->table);
+
+				$query = $this->db->get($this->table);
 				if($query)
 					{
 
@@ -53,5 +54,21 @@ class Hospital_Model extends CI_Model
 				      return FALSE;
 				    }
 		    }
-	}
-?>
+
+    public function login($username,$password)
+    {
+        $this->db->where(['username' => $username, 'password' => $password]);
+
+        $query = $this->db->get($this->table,1);
+        if ($query) {
+            if ($query->num_rows() >= 1) {
+                return $query->result();
+
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+}

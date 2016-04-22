@@ -76,15 +76,13 @@
 
                     <!-- table grid view -->
                     <div class="grid">
-                      <?php echo form_open(base_url('Lab_Controller/add_report_submit'),['id' => 'addform', 'method' => 'POST','name' => 'addform'])
+                      <?php echo form_open(base_url('hospital_dashboard/lab/make_report/submit'),['id' => 'addform', 'method' => 'POST','name' => 'addform'])
                       	?>
                       		<h2>MEDICAL REPORT</h2>
                               <br><br>
                           <?php if(isset($result) && $result!=FALSE)
-                          //if($result[0]->report== null)
                            {
-                               // if ($result[0]->report == null) { //this line willl be uncomment after check actual database
-                               if ($result[0] != false) {
+                                if ($result[0]->report == null) {
                                    ?>
                                    <div class="col-md-4">
                                       <!-- usage stats -->
@@ -128,16 +126,6 @@
                                       </div> <!-- end of column -->
                                   </div> <!-- end of row -->
                               <br>
-                              <!-- Id : <?php echo $result['0']->donor_id ?><br>
-                              Name : <?php echo $result['0']->name ?><br>
-                              Date of birth : <?php echo $result['0']->dob ?><br>
-                              Gender : <?php echo $result['0']->gender ?><br>
-                              Bloodgroup : <?php echo $result['0']->bloodgroup ?><br> -->
-                              <!-- <?php// if(isset($result) &&$result!=FALSE): 
-                                   ?> -->
-                              <!-- Hospital_Id : <?php echo $result['0']->hospital_id ?><br>
-                              Testdate : <?php echo $result['0']->testdate ?><br>
-                              Testtime : <?php echo $result['0']->testtime ?><br> -->
                               <input type="hidden" name="donor_id" value='<?php echo $result['0']->donor_id ?>'>
                               <input type="hidden" name="hospital_id" value='<?php echo $result['0']->hospital_id ?>'> 
                              <!--  <input type="hidden" name="testdate" value='<?php //echo $result['0']->testdate ?>'>
@@ -164,7 +152,11 @@
                                   echo "ALREADY FORWADED";?> <br>
                                   <a href="<?php echo base_url('hospital_dashboard/lab/') ?>">back</a>
                                <?php }
-                          } ?>
+                          }
+                          if (isset($message)) {
+                              echo $message;
+                          }
+                          ?>
  
                     </div>
                 </div>

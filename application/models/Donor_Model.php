@@ -33,6 +33,7 @@ class Donor_Model extends CI_Model
 	public function view(array $where)
 	{
 		$this->db->where($where);
+
 		$query = $this->db->get($this->table); 
 		if($query)
 		{

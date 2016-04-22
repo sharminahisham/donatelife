@@ -46,40 +46,40 @@
     </div>
 </div> <!-- end of header_wrapper -->
 <div>
-    <?php echo form_open(base_url('Hospital_Controller/add_hospital'),['id' => 'addform', 'name' => 'addform']) ?>
+    <?php echo form_open(base_url('hospital/submit'),['id' => 'addform', 'name' => 'addform']) ?>
         <div class="form-reg ">
 			<h1> HOSPITAL REGISTRATION</h1>
             <div class="col-md-6 form-group">
                 <label for="">NAME</label>
-                <input class="form-control" type="text" name="name" id="name" value="<?php echo set_value('name');?>">
+                <input required="" class="form-control" type="text" name="name" id="name" value="<?php echo set_value('name');?>">
             </div>
             <div class="col-md-6 form-group">
                 <label for="">CODE</label>
-                <input class="form-control" type="text" name="code" id="code" value="<?php echo set_value('code');?>">
+                <input required="" class="form-control" type="text" name="code" id="code" value="<?php echo set_value('code');?>">
             </div>
             <div class="col-md-6 form-group">
                 <label for="">USER NAME</label>
-                <input class="form-control" type="text" name="username"id="username" value="<?php echo set_value('username'); ?>">
+                <input required="" class="form-control" type="text" name="username"id="username" value="<?php echo set_value('username'); ?>">
             </div>
             <div class="col-md-6 form-group">
                 <label for="">PASSWORD</label>
-                <input class="form-control" type="password" name="password"id="password" value="<?php echo set_value('password'); ?>">
+                <input required="" class="form-control" type="password" name="password"id="password" value="<?php echo set_value('password'); ?>">
             </div>
 
             <div class="col-md-6 form-group">
                 <label for="">MAIL</label>
-                <input class="form-control" type="email" name="email"id="email" value="<?php echo set_value('email'); ?>">
+                <input required="" class="form-control" type="email" name="email"id="email" value="<?php echo set_value('email'); ?>">
             </div>
             <div class="col-md-6 form-group">
                 <label for="">CONTACT</label>
-                <input class="form-control" type="mobile" name="contact" id="contact" value="<?php echo set_value('contact'); ?>">
+                <input required="" class="form-control" type="mobile" name="contact" id="contact" value="<?php echo set_value('contact'); ?>">
             </div>
             <div class="col-md-12 form-group">
                 <label for="">ADDRESS</label>
                 <textarea name="address" class="form-control" id="address" ><?php echo set_value('address') ?></textarea>
             </div>
             <div class="col-md-12 form-group">
-                <input class="btn btn-default" type="submit" name="usubmit" id="submit" value="SUBMIT">
+                <input required="" class="btn btn-default" type="submit" name="usubmit" id="submit" value="SUBMIT">
                 <input class="btn btn-danger" type="submit" name="ucancel" id="cancel" value="CANCEL">
             </div>
         </div>

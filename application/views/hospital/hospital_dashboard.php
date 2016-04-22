@@ -52,9 +52,6 @@
 
 
         <ul class="menu">
-            <!--                        <li><input type="search" class="searchBox" placeholder="Search.."/></li>-->
-            <!--						<li><a href="#">Help Support</a></li>-->
-            <!--						<li><a href="#">Settings</a></li>-->
             <li class="active"><img src="<?php echo base_url('images/pic1.jpg')?>"/><a href="#">hospital Admin</a></li>
             <li><a href="<?php echo base_url('dashboard/logout')?>"><i class="glyphicon glyphicon-off"></i></a></li>
         </ul>
@@ -80,10 +77,12 @@
                 <!-- states charts -->
                 <div class="col-md-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Sales Stats</div>
+                        <div class="panel-heading">admin</div>
                         <div class="panel-body">
                             <!-- area chart -->
-                            <div id="area-example" style="height:200px;"></div>
+                            <span>Welcome to hospital administrator</span><br/>
+                            <span>You can check the donor details .</span>
+<!--                            <div id="area-example" style="height:200px;"></div>-->
                         </div>
                     </div>
                 </div>

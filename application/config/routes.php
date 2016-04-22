@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*Public routes*/
 $route['index'] = 'Home_Controller/index';
 $route['hospital'] = 'Home_Controller/add_hospital';
+$route['hospital/submit'] = 'Hospital_Controller/add_hospital';
 
 
 
@@ -92,6 +93,7 @@ $route['reportview'] = 'Lab_Controller/view';
 /////////HOSPITAL ADMIN//////////////
 
 $route['hospital-login'] = 'Hospital_Admin_Controller/login';
+$route['hospital-login/verify'] = 'Hospital_Admin_Controller/verify';
 $route['hospital_dashboard'] = 'Hospital_Admin_Controller/dashboard';
 $route['hospital_dashboard/login'] = 'Hospital_Admin_Controller/login';
 $route['hospital_dashboard/logout'] = 'Hospital_Admin_Controller/logout';
@@ -100,9 +102,11 @@ $route['hospital_dashboard/logout'] = 'Hospital_Admin_Controller/logout';
 /*donor*/
 $route['hospital_dashboard/donors'] = 'Hospital_Admin_Controller/index';
 $route['hospital_dashboard/donor/(:num)'] = 'Hospital_Admin_Controller/view_donor/$1';
+$route['hospital_dashboard/donor/token'] = 'Hospital_Admin_Controller/add_tocken';
 
 /*lab*/
 $route['hospital_dashboard/lab'] = 'Hospital_Admin_Controller/view_lab_request';
+$route['hospital_dashboard/lab/make_report/submit'] = 'Lab_Controller/add_report_submit';
 
 /*report*/
 

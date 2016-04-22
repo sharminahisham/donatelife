@@ -14,6 +14,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		$this->load->model('Donor_Model');
 		$this->load->model('User_Model');
 		$this->load->model('Lab_Model');
+		$this->load->model('Hospital_Model');
 		$this->load->model('Tocken_Details_Model');
 	}
 
@@ -52,7 +53,6 @@ class Hospital_Admin_Controller extends Check_Logged
 		$this->session->unset_userdata('logged_in');
 		redirect(base_url('hospital-login'));
 	}
-
 	/*verify login*/
 
 	public function verify()
@@ -69,10 +69,12 @@ class Hospital_Admin_Controller extends Check_Logged
 			$password =  $this->input->post('password');
 
 			$password = md5($password);
-			if ($this->User_Model->login($username, $password, 'hospital')) {
+            $login_data = $this->Hospital_Model->login($username, $password);
+			if ($login_data) {
 				$userdata = [
 					'username' => $username,
 					'type' => 'hospital',
+                    'hospital_id' => $login_data[0]->id,
 					'logged_in' => true
 				];
 				$this->session->set_userdata($userdata);
@@ -90,7 +92,7 @@ class Hospital_Admin_Controller extends Check_Logged
 	public function index()
 	{
 		if($this->logged == true and $_SESSION['type'] == 'hospital'){
-		$data=$this->Donor_Model->view(['statuscode' => '1']);
+		$data=$this->Donor_Model->view(['statuscode' => '1', 'hospital_id' => $_SESSION['hospital_id']]);
 
 		if($data != null)
 			{
@@ -120,10 +122,10 @@ class Hospital_Admin_Controller extends Check_Logged
 		                'table_close'           => '</table>'
 		            ];
 		            $this->table->set_template($template);
-				$this->table->set_heading('Id','Name','Gender','Date of Birth','Address','Blood Group','status code');
+				$this->table->set_heading('Id','Name','Gender','Date of Birth','Address','Blood Group','token');
 				foreach ($data as $key => $value)
 					{
-						$this->table->add_row($value->id, anchor(base_url('hospital_dashboard/donor/'.$value->id),$value->name), $value->gender,$value->dob,$value->address,$value->bloodgroup,$value->statuscode);
+						$this->table->add_row($value->id, anchor(base_url('hospital_dashboard/donor/'.$value->id),$value->name), $value->gender,$value->dob,$value->address,$value->bloodgroup,($value->tockenno == null ? anchor(base_url('hospital_dashboard/donor/'.$value->id), 'give token' ) : $value->tockenno));
 					}
 
 				$data['result'] = $this->table->generate();
@@ -137,7 +139,7 @@ class Hospital_Admin_Controller extends Check_Logged
 		}
 		else
 	    {
-			redirect(base_url('login'));
+			redirect(base_url('hospital-login'));
 
 		}
 	}
@@ -146,26 +148,36 @@ class Hospital_Admin_Controller extends Check_Logged
 
 		public function view_accepted_donor($id)
     {
-		$result = $this->Donor_Model->view(['id' => $id]);
-		if ($result != FALSE) {
-			$data['result'] = $result;
-			$this->load->view('admin/view_hospital_admin',$data);
+        if ($this->logged == true and $_SESSION['type'] == 'hospital') {
 
-		}
+            $result = $this->Donor_Model->view(['id' => $id, 'hospital_id' => $_SESSION['hospital_id']]);
+            if ($result != FALSE) {
+                $data['result'] = $result;
+                $this->load->view('admin/view_hospital_admin', $data);
+
+            }
+        } else {
+            redirect(base_url('hospital-login'));
+        }
 	}
 
 
 
 	public function view_donor($id)
 	{
-		$result = $this->Donor_Model->view(['id' => $id]);
+        if ($this->logged == true and $_SESSION['type'] == 'hospital') {
+
+            $result = $this->Donor_Model->view(['id' => $id, 'hospital_id' => $_SESSION['hospital_id']]);
 
 
-			if ($result != FALSE) {
-				$data['result'] = $result;
-				$this->load->view('hospital/view_accepted_users',$data);
+            if ($result != FALSE) {
+                $data['result'] = $result;
+                $this->load->view('hospital/view_accepted_users', $data);
 
-			}
+            }
+        } else {
+            redirect(base_url('hospital-login'));
+        }
 
 
 	}
@@ -174,8 +186,9 @@ class Hospital_Admin_Controller extends Check_Logged
 
 	public function view_lab_request()
 	{
-		if($this->logged == true){
-		$data=$this->Tocken_Details_Model->view_all();
+        if ($this->logged == true and $_SESSION['type'] == 'hospital') {
+            $where = ['donor.hospital_id' => $_SESSION['hospital_id']];
+		    $data=$this->Tocken_Details_Model->view_all($where);
 
 		if($data != null)
 		{
@@ -230,21 +243,23 @@ class Hospital_Admin_Controller extends Check_Logged
 		}
 		else
 	    {
-			redirect(base_url('Hospitl_Admin_Controller/login'));
-			//var_dump("error in tockenno");
+			redirect(base_url('hospital-login'));
 		}
 	}
 
 	public function view_accepted_users($id)
 	{
+        if ($this->logged == true and $_SESSION['type'] == 'hospital') {
+            $result = $this->Tocken_Details_Model->view(['id' => $id, 'hospital_id' => $_SESSION['hospital_id']]);
+            if ($result != FALSE) {
+                $data['result'] = $result;
+                $this->load->view('hospital/view_lab_request', $data);
 
-		$result = $this->Tocken_Details_Model->view(['id' => $id]);
-		if ($result != FALSE)
-		{
-			$data['result'] = $result;
-			$this->load->view('hospital/view_lab_request',$data);
-
-		}
+            }
+        }
+        else{
+            redirect(base_url('hospital-login'));
+        }
 	}
 
 
@@ -252,7 +267,11 @@ class Hospital_Admin_Controller extends Check_Logged
 
 		public function add_report()
 		{
-			$this->load->view('hospital/make_lab_report');
+            if ($this->logged == true and $_SESSION['type'] == 'hospital') {
+                $this->load->view('hospital/make_lab_report');
+            } else {
+                redirect(base_url('hospital-login'));
+            }
 		}
 
 
@@ -330,45 +349,50 @@ class Hospital_Admin_Controller extends Check_Logged
 
     public function view_report()
     {
-        $data = $this->Lab_Model->view_join();
-        if ($data != false) {
-            $template = [
-                'table_open'            => '<table id="team" width=100% >',
-                'thead_open'            => '<thead >',
-                'thead_close'           => '</thead>',
+        if ($this->logged == true and $_SESSION['type'] == 'hospital') {
+            $where = ['donor.hospital_id' => $_SESSION['hospital_id']];
+            $data = $this->Lab_Model->view_join($where);
+            if ($data != false) {
+                $template = [
+                    'table_open'            => '<table id="team" width=100% >',
+                    'thead_open'            => '<thead >',
+                    'thead_close'           => '</thead>',
 
-                'heading_row_start'     => '<tr>',
-                'heading_row_end'       => '</tr>',
-                'heading_cell_start'    => '<th>',
-                'heading_cell_end'      => '</th>',
+                    'heading_row_start'     => '<tr>',
+                    'heading_row_end'       => '</tr>',
+                    'heading_cell_start'    => '<th>',
+                    'heading_cell_end'      => '</th>',
 
-                'tbody_open'            => '<tbody>',
-                'tbody_close'           => '</tbody>',
+                    'tbody_open'            => '<tbody>',
+                    'tbody_close'           => '</tbody>',
 
-                'row_start'             => '<tr>',
-                'row_end'               => '</tr>',
-                'cell_start'            => '<td>',
-                'cell_end'              => '</td>',
+                    'row_start'             => '<tr>',
+                    'row_end'               => '</tr>',
+                    'cell_start'            => '<td>',
+                    'cell_end'              => '</td>',
 
-                'row_alt_start'         => '<tr>',
-                'row_alt_end'           => '</tr>',
-                'cell_alt_start'        => '<td>',
-                'cell_alt_end'          => '</td>',
+                    'row_alt_start'         => '<tr>',
+                    'row_alt_end'           => '</tr>',
+                    'cell_alt_start'        => '<td>',
+                    'cell_alt_end'          => '</td>',
 
-                'table_close'           => '</table>'
-            ];
-            $this->table->set_template($template);
-            $this->table->set_heading('Name','Gender','mobile','email', 'medical report', 'verified by');
-            foreach ($data as $key => $value)
-            {
-                $this->table->add_row($value->name, $value->gender, $value->mobile,$value->email, $value->medicalreport, $value->verifiedby);
+                    'table_close'           => '</table>'
+                ];
+                $this->table->set_template($template);
+                $this->table->set_heading('Name','Gender','mobile','email', 'medical report', 'verified by');
+                foreach ($data as $key => $value)
+                {
+                    $this->table->add_row($value->name, $value->gender, $value->mobile,$value->email, $value->medicalreport, $value->verifiedby);
+                }
+
+                $data['report'] = $this->table->generate();
+            } else {
+                $data['message'] = 'no report found';
             }
-
-            $data['report'] = $this->table->generate();
-        } else {
-            $data['message'] = 'no report found';
+            $this->load->view('hospital/view_report', $data);
         }
-        $this->load->view('hospital/view_report', $data);
+        else
+            redirect(base_url('hospital-login'));
     }
 
 }

@@ -52,8 +52,9 @@ class Hospital_Controller extends Check_Logged
 				$address = $this->input->post('address');
 				$contact = $this->input->post('contact');
 				$mail = $this->input->post('email');
+
 	            $username = $this->input->post('username');
-	            $password = $this->input->post('password');
+	            $password = md5($this->input->post('password'));
 
 
 				$data = [
@@ -63,16 +64,16 @@ class Hospital_Controller extends Check_Logged
 					'address' => $address,
 					'contact' => $contact,
 					'email' => $mail,
-					'username' =>$username,	
+					'username' =>$username,
 				    'password' =>$password,
 			    ];
 
 			    if($this->Hospital_Model->add($data))
 
-		    	{	
+		    	{
 		    	    $data['message'] = '<script type="text/javascript">
 		    	                     alert("Registration successfully completed");
-		    	                     window.location = "'.base_url('Home_Controller/add_hospital').'";
+		    	                     window.location = "'.base_url('hospital').'";
 		    	                     </script>';
 		    	    $this->load->view('hospital_registration',$data);
 
@@ -81,7 +82,7 @@ class Hospital_Controller extends Check_Logged
 				{
                     $data['message'] = '<script type="text/javascript">
                                     alert("Registration failed");
-                                    window.location = "'.base_url('Home_Controller/add_hospital').'"
+                                    window.location = "'.base_url('hospital').'";
                                    </script>';
                      $this->load->view('hospital_registration',$data);              
 				}

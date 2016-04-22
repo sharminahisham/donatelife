@@ -92,129 +92,15 @@
                                   <div class="panel-heading">Sales Stats</div>
                                   <div class="panel-body">
                                       <!-- area chart -->
-                                      <div id="area-example" style="height:200px;"></div>
+                                      <span>Welcome to Admin.</span><br/><br/>
+                                      <span>click hospital tab and check the hospitals, </span><br/>
+                                      <span>click Donors tab and check the donors status, new requests,etc</span>
+<!--                                      <div id="area-example" style="height:200px;"></div>-->
                                   </div>
                                 </div>
                             </div>
 
-
-                            <!-- usage stats -->
-                            <div class="col-md-4">
-                                <div class="panel panel-default ">
-                                  <div class="panel-heading">Usage stats</div>
-                                    <div class="panel-body" style="height:230px;">
-                                        <table class="stats">
-                                            <tr>
-                                                <td>Google chrome</td><td><span class="label label-success">42.8%</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Firefox</td><td><span class="label label-primary">17.2%</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Safari</td><td><span class="label label-info">15.5%</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Internet Explorer</td><td><span class="label label-warning">15.5%</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Others</td><td><span class="label label-danger">9%</span></td>
-                                            </tr>
-                                        </table>
-                                    </div> <!-- end of panel body -->
-                                </div> <!-- end of panel -->
-                            </div> <!-- end of column -->
                         </div> <!-- end of row -->
-
-
-                            <div class="panel panel-default">
-                              <div class="panel-heading">Employees information</div>
-                              <div class="panel-body">
-
-                                  <!-- table grid view -->
-                                  <div class="grid">
-                                      <table width="100%">
-                                          <tr>
-                                              <th>#</th>
-                                              <th>Employee Name</th>
-                                              <th>Age</th>
-                                              <th>Salary</th>
-                                              <th>Hire date</th>
-                                              <th>Details</th>
-                                          </tr>
-
-                                          <tr>
-                                              <td align="center">1</td>
-                                              <td>Mohanad Kaleia</td>
-                                              <td>26</td>
-                                              <td>800$</td>
-                                              <td>01/08/2014</td>
-                                              <td align="center">
-                                                  <a title="view" class="btn btn-default btn-xs" href="#">
-                                                    <i class="glyphicon glyphicon-file"></i>
-                                                  </a>
-                                              </td>
-                                          </tr>
-
-                                          <tr>
-                                              <td align="center">2</td>
-                                              <td>Rami Aqqad</td>
-                                              <td>27</td>
-                                              <td>850$</td>
-                                              <td>01/01/2015</td>
-                                              <td align="center">
-                                                  <a title="view" class="btn btn-default btn-xs" href="#">
-                                                    <i class="glyphicon glyphicon-file"></i>
-                                                  </a>
-                                              </td>
-                                          </tr>
-
-                                          <tr>
-                                              <td align="center">3</td>
-                                              <td>Mohanad Kaleia</td>
-                                              <td>26</td>
-                                              <td>800$</td>
-                                              <td>01/08/2014</td>
-                                              <td align="center">
-                                                  <a title="view" class="btn btn-default btn-xs" href="#">
-                                                    <i class="glyphicon glyphicon-file"></i>
-                                                  </a>
-                                              </td>
-                                          </tr>
-
-                                          <tr>
-                                              <td align="center">4</td>
-                                              <td>Jone Doe</td>
-                                              <td>41</td>
-                                              <td>1200$</td>
-                                              <td>01/08/2014</td>
-                                              <td align="center">
-                                                  <a title="view" class="btn btn-default btn-xs" href="#">
-                                                    <i class="glyphicon glyphicon-file"></i>
-                                                  </a>
-                                              </td>
-                                          </tr>
-
-                                          <tr>
-                                              <td align="center">5</td>
-                                              <td>Mohanad Kaleia</td>
-                                              <td>26</td>
-                                              <td>800$</td>
-                                              <td>01/08/2014</td>
-                                              <td align="center">
-                                                  <a title="view" class="btn btn-default btn-xs" href="#">
-                                                    <i class="glyphicon glyphicon-file"></i>
-                                                  </a>
-                                              </td>
-                                          </tr>
-                                      </table>
-                                  </div>
-                              </div>
-                            </div>
-
 
 					</div>
 				</div>

@@ -15,7 +15,7 @@
 			</div>
 
 			<div class="login-form">
-			<?php echo form_open(base_url('Hospital_Admin_Controller/verify'),['method' => 'POST']) ?>
+			<?php echo form_open(base_url('hospital-login/verify'),['method' => 'POST']) ?>
 				<div class="control-group">
 				<input type="text" class="login-field" value="" placeholder="username" id="login-name" name="username">
 				<label class="login-field-icon fui-user" for="login-name"></label>
@@ -28,15 +28,11 @@
 
 				<input type="submit" value="login" class="btn btn-primary btn-large btn-block">
 				<!-- <a class="btn btn-primary btn-large btn-block" href="#">login</a> -->
+            </form>
 			</div>
 		</div>
 	</div>
 
-<!-- 
-	USERNAME<input type="text" name="username"><br><br>
-	PASSWORD<input type="password" name="password"><br><br>
-	<input type="submit" value="LOGIN">
- --></form>
 
 <?php if (isset($message)): ?>
 	<?php echo $message; ?>
